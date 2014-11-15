@@ -1,8 +1,8 @@
 from rest_framework import viewsets
+from map.api.serializers import CompanySerializer
+from map.models import Company
 
-
-#example
-# class UserViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     # lookup_field = 'username'
+class CompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    # lookup_field = 'username'

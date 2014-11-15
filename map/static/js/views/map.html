@@ -1,0 +1,31 @@
+Hello Map
+<div id='map'>
+    <mapbox map-id=MAPBOX_ID lat="47.603569" lng="-122.329453"> <!--Set these based on location-->
+
+    </mapbox>
+</div>
+
+
+
+<!--Example-->
+<!--{#L.mapbox.accessToken = 'pk.eyJ1IjoiYmtpc3RuZXIiLCJhIjoiN2I1M0stSSJ9.KuFhmem-2ZN4Q6LddSUgiQ';#}
+{#var map = L.mapbox.map('map', 'bkistner.k0m7ndk8')#}
+{#    .setView([37, -122], 5);#}
+{#{% for view, view_count  in view_and_count.iteritems %}#}
+{#L.mapbox.featureLayer({#}
+{#    type: 'Feature',#}
+{#    geometry: {#}
+{#        type: 'Point',#}
+{#        coordinates: [#}
+{#            {{ view.longitude }},#}
+{#            {{ view.latitude }}#}
+{#        ]#}
+{#    },#}
+{#    properties: {#}
+{#        title: "{{ view_count }}",#}
+{#        'marker-color': '#548cba',#}
+{#        'marker-size': 'small',#}
+{#        'marker-symbol': 'ferry'#}
+{#    }#}
+{#{).addTo(map);#}
+{#{% endfor %}#}-->

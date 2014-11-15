@@ -1,18 +1,15 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework import routers
+from map.api.views import CompanyViewSet
 
-#Example
 router = routers.DefaultRouter()
-# router.register(r'users', UserViewSet, base_name='users')
-# router.register(r'projects', ProjectViewSet, base_name='projects')
-
+router.register(r'company', CompanyViewSet, base_name='users')
 
 urlpatterns = patterns('',
-   url(r'^', include(router.urls)),
-   #DRF Routes
-   # url(r'drf/$', 'map.views.', name=''),
-   #Angular Endpoints
-    url(r'^angular/$', 'map.views.index', name="index"),
+    url(r'^', include(router.urls)),
+    # url(r'rest/$', 'map.views.index', name='index'),
+    url(r'angular/$', 'map.views.index', name='index'),
+
     url(r'^admin/', include(admin.site.urls)),
 )

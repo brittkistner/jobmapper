@@ -1,0 +1,81 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Angular Project</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!------- Angular ------->
+{#    <script src="{% static "js/vendors/angular/angular.min.js" %}"></script>#}
+    <script src="{% static "js/vendors/angular/angular.js" %}"></script>
+    <script src="{% static "js/vendors/angular/angular-route.min.js" %}"></script>
+    <script src="{% static "js/vendors/angular-ui/ui-bootstrap-tpls-0.11.2.min.js" %}"></script>
+    <script src="{% static "js/vendors/angular/angular-resource.js" %}"></script>
+
+
+    <!------- Bootstrap ------->
+      <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+
+    <!------- JavaScript ------->
+    <script src="{% static "js/app.js" %}"></script>
+
+    <!------- Factories ------->
+{#    <script src="{% static "js/factories/projectFactory.js" %}"></script>#}
+{#    <script src="{% static "js/factories/userResource.js" %}"></script>#}
+
+
+    <!------- Services ------->
+{#    <script src="{% static "js/services/auth.js" %}"></script>#}
+
+    <!------- Mapbox ------->
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>
+
+    <!------- Directives ------->
+    <script src="{% static "js/directives/mapboxDirective.js" %}"></script>
+
+
+
+    <!------- Controllers ------->
+    <script src="{% static "js/controllers/homeController.js" %}"></script>
+    <script src="{% static "js/controllers/mapController.js" %}"></script>
+    <script src="{% static "js/controllers/companyController.js" %}"></script>
+
+    <!------- CSS ------->
+    <link rel="stylesheet" href="{% static "css/index.css" %}">
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="{% static "css/map.css" %}">
+
+</head>
+<body>
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Jobmapper</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Active</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-app="jobmapper">
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
