@@ -7,11 +7,25 @@
     </div>-->
 </div>
 
-<!--{#{{ company }}#}
-{##}
-{#{{ overallRating }}#}-->
+overall rating: {{ company.overall_rating }}
+<br>
+culture values rating : {{ company.culture_values_rating }}
+<br>
+senior_leadership_rating : {{ company.senior_leadership_rating }}
+<br>
+compensation_benefits_rating : {{ company.compensation_benefits_rating }}
+<br>
+career_opportunities_rating : {{ company.career_opportunities_rating }}
+<br>
+work_life_balance_rating : {{ company.work_life_balance_rating }}
+<br>
+Number of ratings: {{ company.number_ratings }}
+<br>
+<h4>Overall Rating</h4>
+<donut-chart data="4.2"></donut-chart>
 
-<donut-chart></donut-chart>
-<donut-chart></donut-chart>
-<donut-chart></donut-chart>
+<h4>Senior Leadership Rating</h4>
+<donut-chart data="3.8"></donut-chart>
+<h4>Work/Life Balance Rating</h4>
+<donut-chart data="4"></donut-chart>
 

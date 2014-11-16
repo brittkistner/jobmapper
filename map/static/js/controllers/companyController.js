@@ -1,7 +1,7 @@
-function companyController($scope, $http, $routeParams) {
+function companyController($scope, $http, $routeParams ) {
     console.log('companyController');
     $scope.companyId = $routeParams.companyId;
-    console.log($scope.companyId);
+//    console.log($scope.companyId);
 
     $http.get('/companies/' + $scope.companyId)
         .success(function (company) {

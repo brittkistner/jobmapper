@@ -1,43 +1,21 @@
 jobmapper.directive('donutChart', function() {
-//include this in index
     function link(scope, element, attr){
 
-        //TEST APP
-//       var color = d3.scale.category10();
-////       var data = scope.data;
-//        var data = [10, 20, 30];
-//        var width = 300;
-//        var height = 300;
-//        var min = Math.min(width, height);
-//        var svg = d3.select(element[0]).append('svg');
-//        var pie = d3.layout.pie().sort(null);
-//        var arc = d3.svg.arc()
-//              .outerRadius(min / 2 * 0.9)
-//              .innerRadius(min / 2 * 0.5);
-//            svg.attr({width: width, height: height});
-//
-//        var g = svg.append('g')
-//        // center the donut chart
-//        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-//            // add the <path>s for each arc slice
-//            g.selectAll('path').data(pie(data))
-//              .enter().append('path')
-//        .style('stroke', 'white')
-//        .attr('d', arc)
-//        .attr('fill', function(d, i){ return color(i) });
-
-//WORKING ON
         var width = 500;
             height = 500;
+        //make width and height variable?
             τ = 2* Math.PI; // http://tauday.com/tau-manifesto
-
+        var data = scope.data;
+        console.log(data);
+        var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
+        console.log("arcValue is " + arcValue);
         // An arc function with all values bound except the endAngle. So, to compute an
         // SVG path string for a given angle, we pass an object with an endAngle
         // property to the `arc` function, and it will return the corresponding string.
         var arc = d3.svg.arc()
             .innerRadius(180)
             .outerRadius(240)
-            .startAngle(-.35 * τ)
+            .startAngle(-.35 * τ);
 //            .endAngle(function(d) { return (d.value / d.size) * 2 * Math.PI; });
 
         // Create the SVG container, and apply a transform such that the origin is the
@@ -68,8 +46,8 @@ jobmapper.directive('donutChart', function() {
         setInterval(function() {
           foreground.transition()
               .duration(750)
-//              .call(arcTween, .6 * τ);
-              .call(arcTween, .35 * τ); //i will set
+//              .call(arcTween, .35 * τ); //i will set
+              .call(arcTween, arcValue); //i will set
         }, 1500);
 
         // Creates a tween on the specified transition's "d" attribute, transitioning
@@ -126,7 +104,7 @@ jobmapper.directive('donutChart', function() {
     }
     return {
         link: link,
-        restrict: 'E'
-//        scope: { data: '=' }
+        restrict: 'E',
+        scope: { data: '=' }
     }
 });
