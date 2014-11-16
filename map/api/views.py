@@ -1,23 +1,26 @@
 import json
 import urllib
 # import django_filters
-from rest_framework import viewsets
+from django.core import serializers
+from rest_framework import viewsets, status
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
-from map.api.serializers import CompanySerializer
-from map.models import Company
+from map.api.serializers import CompanySerializer, KeywordSerializer
+from map.models import Company, Keyword
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
-    filter_fields = ('id',)
+    # filter_fields = ('id',)
 
+    #Return a set of companies based on location, industry, and keyword searches
     @list_route()
     def get_companies_by_location(self, request):
-        #Get lat and long for searched placeName
+        print self.request.QUERY_PARAMS
         location = self.request.QUERY_PARAMS.get('location', None)
+        #Get lat and long for searched placeName
         request = "http://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false".format(location)
         # request = "http://maps.googleapis.com/maps/api/geocode/json?address={}&key={}".format(location, GOOGLE_API_KEY)
         data = json.loads(urllib.urlopen(request).read())
@@ -26,16 +29,46 @@ class CompanyViewSet(viewsets.ModelViewSet):
             my_lat = data['results'][0]['geometry']['location']['lat']
             my_lng = data['results'][0]['geometry']['location']['lng']
             queryset = Company.objects.all()
-            test_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01)
-            print test_query
-            serializer = CompanySerializer(test_query, many=True)
-            return Response(serializer.data)
+            filter_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01)
+
+            print filter_query
+            location = {
+                "latitude": my_lat,
+                "longitude": my_lng
+            }
+            companies_serializer = CompanySerializer(filter_query, many=True)
+            # location_serializer = json.dumps(location)
+            # print location_serializer
+            return Response(companies_serializer.data)
+
+    #Industry details
+    # industry = self.request.QUERY_PARAMS.get('industry', None)
+    #check on the lower and uppercase to match industry
+    #filter_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01, industry=industry)
 
 
-# class KeywordViewSet(viewsets.ModelViewSet):
-#     queryset = Company.objects.all()
-#     serializer_class = CompanySerializer
-#     company = CompanySerializer(read_only=True)
-#
-#     class Meta:
-#         model = Keyword
+    #Keyword details
+    # keywords = self.request.QUERY_PARAMS.get('keywords', None)
+
+
+    @list_route()
+    def get_industries(self, request):
+        companies = Company.objects.all()
+        industries = []
+        for company in companies:
+            # need to check the key values if this actually works
+            if company.industry.upper() not in industries and company.industry != '':
+                industries.append({'name': company.industry.upper()})
+        print industries
+        data = json.dumps(industries)
+        return Response(data)
+
+
+
+class KeywordViewSet(viewsets.ModelViewSet):
+    queryset = Keyword.objects.all()
+    serializer_class = KeywordSerializer
+    company = CompanySerializer(read_only=True)
+
+    class Meta:
+        model = Keyword

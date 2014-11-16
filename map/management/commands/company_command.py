@@ -1,14 +1,15 @@
 from numbers import Number
 from django.core.management import BaseCommand
-from map.models import Company
+from map.models import Company, Keyword
 import csv
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         print 'hello'
-        with open('/Users/bkistner/Desktop/RocketU/projects/jobmapper/map/management/commands/csv_company.csv', 'rb') as file:
-            for row in csv.reader(file):
-                company = Company.objects.create(LICID=int(row[1]),
+        with open('/Users/bkistner/Desktop/RocketU/projects/jobmapper/map/management/commands/csv_company.csv', 'rb') as company_file:
+            for row in csv.reader(company_file):
+                company = Company.objects.create(  assigned_key = int(row[0]),
+                                                   LICID=int(row[1]),
                                                    GDCID=int(row[2]),
                                                    name=row[3],
                                                    street_address=row[4],
@@ -34,7 +35,7 @@ class Command(BaseCommand):
                                                    career_opportunities_rating=float(row[24]),
                                                    work_life_balance_rating=float(row[25]),
                                                    number_ratings=int(row[26]),
-                                                   industry=row[27])
+                                                   industry=row[27].lower(),)
                                                    # ceo=row[28],
                                                    # ceo_image=row[29],
                                                    # ceo_num_rating=row[30],
@@ -44,6 +45,8 @@ class Command(BaseCommand):
                 company.geocode(row[8])
                 company.save()
 
-
-                # Keyword.objects.create(CID=company__pk=id, word=row[])
+        # with open('/Users/bkistner/Desktop/RocketU/projects/jobmapper/map/management/commands/csv_keyword.csv', 'rb') as keyword_file:
+        #     for row in csv.reader(keyword_file):
+        #         Keyword.objects.create(company=company__id=row[0],
+        #                                word=row[1])
 

@@ -1,6 +1,16 @@
 function mapController($scope, $http) {
     console.log('mapController');
 
+    $http.get('/companies/get_industries')
+        .success(function (industries) {
+            console.log(industries);
+            $scope.industries = industries;
+        })
+        .error(function (error) {
+            console.log('error');
+            console.log(error);
+        });
+
     $scope.searchCompany = function(placeName) {
         console.log(placeName);
         console.log(encodeURIComponent(placeName));

@@ -1,14 +1,13 @@
 from rest_framework import serializers
-from map.models import Company
+from map.models import Company, Keyword
 
 
 class CompanySerializer(serializers.ModelSerializer):
-    #example
-    # project_count = serializers.SerializerMethodField('get_project_count')
 
     class Meta:
         model = Company
-        fields = ('id',
+        fields = ('assigned_key',
+            # 'id',
                   'LICID',
                   'GDCID',
                   'name',
@@ -40,6 +39,10 @@ class CompanySerializer(serializers.ModelSerializer):
                   'industry',
                   )
 
-    #example
-    # def get_project_count(self, obj):
-    #     return obj.projects.count()
+    # def get_keywords(self, obj):
+    #     return obj.keywords
+
+class KeywordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Keyword
+        fields = ("word", "company")

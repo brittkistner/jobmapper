@@ -7,14 +7,16 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('map', '0002_auto_20141114_2329'),
+        ('map', '0001_initial'),
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.RemoveField(
             model_name='company',
-            name='twitter',
-            field=models.CharField(max_length=50, null=True),
-            preserve_default=True,
+            name='ceo',
+        ),
+        migrations.RemoveField(
+            model_name='company',
+            name='ceo_pct_disapprove',
         ),
     ]

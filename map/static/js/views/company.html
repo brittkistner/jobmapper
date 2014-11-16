@@ -1,0 +1,11 @@
+<div ng-switch="company">
+    <div ng-if="company.logo_url">
+        <img src="{{ company.logo_url }}">
+    </div>
+    <div ng-if="company.logo_url == ''">
+        <p>Image No image available</p>
+        <!--Show empty image-->
+    </div>
+</div>
+
+{{ company }}
