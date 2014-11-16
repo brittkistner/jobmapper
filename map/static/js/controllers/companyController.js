@@ -7,6 +7,7 @@ function companyController($scope, $http, $routeParams) {
         .success(function (company) {
             console.log(company);
             $scope.company = company;
+            $scope.overallRating = Math.floor(100 * (company.overall_rating/5.0)) + "%";
         })
         .error(function (error) {
             console.log('error');

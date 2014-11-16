@@ -4,18 +4,18 @@ function mapController($scope, $http) {
     $http.get('/companies/get_industries')
         .success(function (industries) {
             console.log(industries);
-            $scope.industries = industries;
+//            $scope.industries = industries;
         })
         .error(function (error) {
             console.log('error');
             console.log(error);
         });
 
-    $scope.searchCompany = function(placeName) {
+    $scope.searchCompany = function(placeName, keywords) {
         console.log(placeName);
+        console.log(keywords);
         console.log(encodeURIComponent(placeName));
-//        http://127.0.0.1:8000/companies/get_companies_by_location/?location=94104
-        $http.get('/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName))
+        $http.get('/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName) + '&keywords=' + encodeURIComponent(keywords))
             .success(function(companies) {
                 console.log('success');
                 console.log(companies);

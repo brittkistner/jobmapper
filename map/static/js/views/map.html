@@ -5,20 +5,25 @@
 <select ng-model="testing"  ng-options="industry.name for industry in industries" placeholder="Industry Choice"></select>
 <br>
 <span>Keywords:</span>
-<input ng-model="keyword" type="text" placeholder="search by keyword">
+<input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">
 <br>
-<button data-ng-click="searchCompany(placeName);">Search</button>
+<button data-ng-click="searchCompany(placeName, keywords);">Search</button>
 
 <!--hide the div-->
-<div id="map">
-<!--{#    <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.lat }}" lng="{{ location.lng }}">#}-->
-    <mapbox map-id="bkistner.k0m7ndk8" lat="37.7833" lng="-122.4167" zoom="13">
-        <div ng-repeat="company in companies">
-            <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">
-               <h1>{{company.name}}</h1>
-                    what other information do you want to add here?
-               <a href="#/companies/{{ company.id }}">Company Page</a>
-            </marker>
+<div class="row">
+    <div class="col-xs-6">
+        <div id="map">
+        <!--{#    <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.lat }}" lng="{{ location.lng }}">#}-->
+            <mapbox map-id="bkistner.k0m7ndk8" lat="37.7833" lng="-122.4167" zoom="13">
+                <div ng-repeat="company in companies">
+                    <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">
+                       <h1>{{company.name}}</h1>
+                            what other information do you want to add here?
+                       <a href="#/companies/{{ company.assigned_key }}">Company Page</a>
+                    </marker>
+                </div>
+            </mapbox>
         </div>
-    </mapbox>
+    </div>
 </div>
+

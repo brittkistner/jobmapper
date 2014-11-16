@@ -19,24 +19,19 @@
     <!------- JavaScript ------->
     <script src="{% static "js/app.js" %}"></script>
 
-    <!------- Factories ------->
-{#    <script src="{% static "js/factories/projectFactory.js" %}"></script>#}
-{#    <script src="{% static "js/factories/userResource.js" %}"></script>#}
-
-
-    <!------- Services ------->
-{#    <script src="{% static "js/services/auth.js" %}"></script>#}
-
     <!------- Mapbox ------->
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>
+{#    <script src="{% static "js/vendors/mapbox/prettify.min.js" %}"></script>#}
+
 
     <!------- Highcharts ------->
 {#    <script src="http://code.highcharts.com/stock/highstock.src.js"></script>#}
 
+    <!------- D3 ------->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
     <!------- Directives ------->
     <script src="{% static "js/directives/mapboxDirective.js" %}"></script>
-
-
 
     <!------- Controllers ------->
     <script src="{% static "js/controllers/homeController.js" %}"></script>
@@ -47,6 +42,7 @@
     <link rel="stylesheet" href="{% static "css/index.css" %}">
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />
     <link rel="stylesheet" href="{% static "css/map.css" %}">
+{#    <link rel="stylesheet" href="{% static "css/prettify.css" %}">#}
 
 </head>
 <body>

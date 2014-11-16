@@ -10,3 +10,15 @@
     /*border: 2px solid green;*/
     /*min-height: 100%;*/
 /*}*/
+
+
+
+.container {
+}
+.angular-mapbox-map {
+  width: 100%;
+  height: 300px;
+}
+pre.prettyprint {
+  border: 0;
+}
