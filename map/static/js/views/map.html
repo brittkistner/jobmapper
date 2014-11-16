@@ -10,17 +10,16 @@
 <button data-ng-click="searchCompany(placeName);">Search</button>
 
 <!--hide the div-->
-Hello Map
-<div id='map'>
+<div id="map">
 <!--{#    <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.lat }}" lng="{{ location.lng }}">#}-->
-    <mapbox map-id="bkistner.k0m7ndk8" lat="37.7833" lng="-122.4167" zoom="13" style="position: relative; width: 200px;">
-<!--{#        <div ng-repeat="place in places">#}
-{#            <marker lat="{{company.lat}}" lng="{{company.lng}}" color="#39cccc" symbol="ferry"> change symbol#}
-{#           <h1>{{company.name}}</h1>#}
-{#                what other information do you want to add here?#}
-{#             <a href="#/companies/{{ company.id }}">Company Page</a>#}
-{#            </marker>#}
-{#        </div>#}-->
+    <mapbox map-id="bkistner.k0m7ndk8" lat="37.7833" lng="-122.4167" zoom="13">
+        <div ng-repeat="company in companies">
+            <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">
+               <h1>{{company.name}}</h1>
+                    what other information do you want to add here?
+               <a href="#/companies/{{ company.id }}">Company Page</a>
+            </marker>
+        </div>
     </mapbox>
 </div>
 

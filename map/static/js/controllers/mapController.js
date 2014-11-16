@@ -5,9 +5,10 @@ function mapController($scope, $http) {
         console.log(placeName);
         console.log(encodeURIComponent(placeName));
         $http.get('/companies?location=' + encodeURIComponent(placeName))
-            .success(function(response) {
+            .success(function(companies) {
                 console.log('success');
-                console.log(response);
+                console.log(companies);
+                $scope.companies = companies;
             })
             .error(function(error) {
                 console.log('error');
