@@ -8,7 +8,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('id', 'name', 'street_address', 'city', 'state', 'zip_code', 'industry', 'latitude', 'longitude') #do i need this?
+        fields = ('id', 'name', 'street_address', 'city', 'state', 'zip_code', 'industry', 'latitude', 'longitude')
 
     #example
     # def get_project_count(self, obj):

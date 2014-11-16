@@ -1,35 +1,21 @@
 import json
 import urllib
-import django_filters
-from rest_framework import generics
+# import django_filters
+from rest_framework import viewsets
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
-from local_settings import GOOGLE_API_KEY
 from map.api.serializers import CompanySerializer
 from map.models import Company
 
-class CompanyFilter(django_filters.FilterSet):
 
-    min_latitude = django_filters.NumberFilter(name="latitude", lookup_type='gte')
-    max_latitude = django_filters.NumberFilter(name="latitude", lookup_type='lte')
-    min_longitude = django_filters.NumberFilter(name="longitude", lookup_type='gte')
-    max_longitude = django_filters.NumberFilter(name="longitude", lookup_type='lte')
-
-    class Meta:
-        model = Company
-        fields = ['min_latitude', 'max_latitude', 'min_longitude', 'max_longitude']
-
-class CompanyList(generics.ListAPIView):
-    # queryset = Company.objects.all()
+class CompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all()
     serializer_class = CompanySerializer
-    filter_class = CompanyFilter(generics.ListAPIView)
-    # lookup_field = 'username'
 
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = CompanySerializer(queryset, many=True)
-        return Response(serializer.data)
+    filter_fields = ('id',)
 
-    def get_queryset(self):
+    @list_route()
+    def get_companies_by_location(self, request):
         #Get lat and long for searched placeName
         location = self.request.QUERY_PARAMS.get('location', None)
         request = "http://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false".format(location)
@@ -42,20 +28,14 @@ class CompanyList(generics.ListAPIView):
             queryset = Company.objects.all()
             test_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01)
             print test_query
-            return test_query
-            # test_query = queryset.filter(min_latitude=my_lat-.02, max_latitude=my_lat+.02, min_longitude=my_lng-.02, max_longitude=my_lng+.02)
-            # companies = Company.objects.filter(latitude__range=(my_lat-.02, my_lat +.02), longi__range=(my_lng-.02, my_lng+.02), industry=industry, keywords)
-
-#custom query example
-# def get_queryset(self):
-#         queryset = Project.objects.all()
-#         active_status = self.request.QUERY_PARAMS.get('is_active', None)
-#         if active_status is not None:  # Optionally filters against 'is_active' query param
-#             queryset = queryset.filter(is_active=active_status)
-#         return queryset
-
-#search example
-# # /users/?search=rudy searches across all listed fields
-#     search_fields = ('first_name', 'last_name', 'about')
+            serializer = CompanySerializer(test_query, many=True)
+            return Response(serializer.data)
 
 
+# class KeywordViewSet(viewsets.ModelViewSet):
+#     queryset = Company.objects.all()
+#     serializer_class = CompanySerializer
+#     company = CompanySerializer(read_only=True)
+#
+#     class Meta:
+#         model = Keyword

@@ -79,6 +79,9 @@ USE_L10N = True
 USE_TZ = True
 
 REST_FRAMEWORK = {
+    'PAGINATE_BY': 10,
+     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 100,  # Maximum limit allowed when using `?page_size=xxx`.
     #Filter
     'DEFAULT_FILTER_BACKENDS': (
         'rest_framework.filters.DjangoFilterBackend',
