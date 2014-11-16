@@ -34,19 +34,12 @@ class CompanyList(generics.ListAPIView):
         request = "http://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false".format(location)
         data = json.loads(urllib.urlopen(request).read())
 
-        #set industry
-        #set other search terms
         if data['status'] == 'OK':
             my_lat = data['results'][0]['geometry']['location']['lat']
             my_lng = data['results'][0]['geometry']['location']['lng']
             queryset = Company.objects.all()
             return queryset
             # test_query = queryset.filter(min_latitude=my_lat-.02, max_latitude=my_lat+.02, min_longitude=my_lng-.02, max_longitude=my_lng+.02)
-            # print test_query
-            # return test_query
-        
-
-
             # companies = Company.objects.filter(latitude__range=(my_lat-.02, my_lat +.02), longi__range=(my_lng-.02, my_lng+.02), industry=industry, keywords)
 
 #custom query example
