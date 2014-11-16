@@ -40,7 +40,7 @@ class CompanyList(generics.ListAPIView):
             my_lat = data['results'][0]['geometry']['location']['lat']
             my_lng = data['results'][0]['geometry']['location']['lng']
             queryset = Company.objects.all()
-            test_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02)
+            test_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01)
             print test_query
             return test_query
             # test_query = queryset.filter(min_latitude=my_lat-.02, max_latitude=my_lat+.02, min_longitude=my_lng-.02, max_longitude=my_lng+.02)
