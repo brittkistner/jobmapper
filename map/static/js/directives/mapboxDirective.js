@@ -1,4 +1,5 @@
-L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
+L.mapbox.accessToken = 'pk.eyJ1IjoiYmtpc3RuZXIiLCJhIjoiN2I1M0stSSJ9.KuFhmem-2ZN4Q6LddSUgiQ';
+//L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
 
 angular.module('jobmapper').directive('featureLayer', function() {
   return {
@@ -39,6 +40,8 @@ angular.module('jobmapper').directive('mapbox', function($compile, $q) {
       var mapHeight = attrs.height || 500;
       element.css('width', mapWidth + 'px');
       element.css('height', mapHeight + 'px');
+//      element.css('width', '100%');
+//      element.css('height', '100%');
 
       var zoom = attrs.zoom || 12;
       if(attrs.lat && attrs.lng) {

@@ -35,6 +35,15 @@ class Command(BaseCommand):
                                                    work_life_balance_rating=float(row[25]),
                                                    number_ratings=int(row[26]),
                                                    industry=row[27])
+                                                   # ceo=row[28],
+                                                   # ceo_image=row[29],
+                                                   # ceo_num_rating=row[30],
+                                                   # ceo_pct_approve=row[31],
+                                                   # ceo_pct_disapprove=row[32])
+
                 company.geocode(row[8])
                 company.save()
+
+
+                # Keyword.objects.create(CID=company__pk=id, word=row[])
 

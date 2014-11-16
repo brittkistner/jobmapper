@@ -33,8 +33,13 @@ class Company(models.Model):
     career_opportunities_rating = models.FloatField(null=True)
     work_life_balance_rating = models.FloatField(null=True)
     number_ratings = models.IntegerField(null=True)
-    industry = models.CharField(max_length=255, null=True) #there can be more than one
-    # ceo = models.ForeignKey(CEO, related_name="company") #think about this
+    industry = models.CharField(max_length=255, null=True)
+    # ceo = models.CharField(max_length=255, null=True)
+    ## ceo_image=models.URLField(null=True),
+    # ceo_num_rating=models.IntegerField(null=True),
+    # ceo_pct_approve=models.FloatField(null=True),
+    # ceo_pct_disapprove=models.FloatField(null=True))
+
 
     def __unicode__(self):
             return u"{}".format(self.name)
@@ -55,7 +60,7 @@ class Company(models.Model):
 
 # class Keyword(models.Model):
 #     word = models.CharField(max_length=75)
-#     companies = models.ManyToManyField(Company, related_name="keywords")
+#     companies = models.OneToManyField(Company, related_name="keywords")
 #
 #     def __unicode__(self):
 #         return u"{}".format(self.word)
