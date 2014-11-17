@@ -1,0 +1,13 @@
+svg rect {
+  fill: #D0743C;
+}
+
+svg rect:hover {
+  fill: #6B486B;
+}
+
+svg text {
+  fill: white;
+  font: 3em;
+  text-anchor: end;
+}

@@ -1,9 +1,15 @@
 .row .company{
-    height: 300px;
+    min-height: 300px;
     border: 1px solid black;
 }
 
 .top{
-    height: 300px;
+    min-height: 300px;
     border: 1px solid black;
+}
+
+.overall-rating{
+    min-width: 300px;
+    text-align: center;
+    min-height: 300px;
 }
