@@ -87,6 +87,13 @@ REST_FRAMEWORK = {
         'rest_framework.filters.DjangoFilterBackend',
 
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
 }
 
 # Static files (CSS, JavaScript, Images)

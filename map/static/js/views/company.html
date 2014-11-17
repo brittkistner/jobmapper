@@ -81,8 +81,8 @@
             <h3 class="panel-title">Overall Rating</h3>
           </div>
           <div class="panel-body">
-            <donut-chart data="[4.2]"></donut-chart>
-            <!--<donut-chart data="[company.overall_rating]"></donut-chart>-->
+            <!--<donut-chart data="[4.2]"></donut-chart>-->
+            <donut-chart data="company.overall_rating"></donut-chart>
           </div>
         </div>
     </div>
@@ -91,11 +91,11 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <h4>work_life_balance_rating</h4>
-                    <small-donut-chart data="[4.1]"></small-donut-chart>
+                    <small-donut-chart data="company.work_life_balance_rating"></small-donut-chart>
                 </div>
                 <div class="col-sm-6">
                     <h4>culture values rating</h4>
-                    <small-donut-chart data="[3.5]"></small-donut-chart>
+                    <small-donut-chart data="company.culture_values_rating"></small-donut-chart>
                 </div>
             </div>
         </div>
@@ -103,11 +103,11 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <h4>senior_leadership_rating</h4>
-                    <small-donut-chart data="[3.8]"></small-donut-chart>
+                    <small-donut-chart data="company.senior_leadership_rating"></small-donut-chart>
                 </div>
                 <div class="col-sm-6">
                     <h4>compensation_benefits_rating</h4>
-                    <small-donut-chart data="[4.5]"></small-donut-chart>
+                    <small-donut-chart data="company.compensation_benefits_rating"></small-donut-chart>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
             <h3 class="panel-title">Comparison of Average Number of followers</h3>
           </div>
           <div class="panel-body">
-              <bar-chart data="[500, 3000]"></bar-chart>
+              <bar-chart data="[company.num_followers,500]"></bar-chart>
 <!--{#              {{ company.num_followers }}#}-->
               <!--get average num followers across all companies, do this in controller -->
           </div>
