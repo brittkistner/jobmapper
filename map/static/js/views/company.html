@@ -1,31 +1,145 @@
-<div ng-switch="company">
-    <div ng-if="company.logo_url">
-        <img src="{{ company.logo_url }}">
+<!--<div ng-switch="company">
+{#    <div ng-if="company.logo_url">#}
+{#        <img src="{{ company.logo_url }}">#}
+{#    </div>#}
+{#    <div ng-if="company.logo_url == ''">#}
+{#        <p>Image No image available</p>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#overall rating: {{ company.overall_rating }}#}
+{#<br>#}
+{#culture values rating : {{ company.culture_values_rating }}#}
+{#<br>#}
+{#senior_leadership_rating : {{ company.senior_leadership_rating }}#}
+{#<br>#}
+{#compensation_benefits_rating : {{ company.compensation_benefits_rating }}#}
+{#<br>#}
+{#career_opportunities_rating : {{ company.career_opportunities_rating }}#}
+{#<br>#}
+{#work_life_balance_rating : {{ company.work_life_balance_rating }}#}
+{#<br>#}
+{#Number of ratings: {{ company.number_ratings }}#}
+{#<br>#}
+{#<h4>Overall Rating</h4>#}
+{#<donut-chart data="4.2"></donut-chart>#}
+{##}
+{#<h4>Senior Leadership Rating</h4>#}
+{#<donut-chart data="3.8"></donut-chart>#}
+{#<h4>Work/Life Balance Rating</h4>#}
+{#<donut-chart data="4"></donut-chart>#}-->
+<div class="row top">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            Image Goes Here
+            <!--<div ng-switch="company">
+{#    <div ng-if="company.logo_url">#}
+{#        <img src="{{ company.logo_url }}">#}
+{#    </div>#}
+{#    <div ng-if="company.logo_url == ''">#}
+{#        <p>Image No image available</p>#}
+{#    </div>#}
+{#</div>#}-->
+            Gluten-free Schlitz fap polaroid. Twee Tumblr polaroid bicycle rights +1 wayfarers. Mustache beard chillwave mumblecore, taxidermy master cleanse messenger bag disrupt pug pop-up Vice retro Carles. Chia food truck Thundercats banjo, semiotics paleo Pitchfork American Apparel locavore Helvetica tilde mixtape tote bag. Twee taxidermy cardigan, next level hella synth Banksy heirloom Williamsburg literally. Mlkshk tattooed skateboard chia banjo. Art party High Life heirloom, sriracha lomo plaid scenester chambray gluten-free fixie mumblecore occupy Neutra.
+          </div>
+          <div class="panel-footer">Company Name Here</div>
+        </div>
     </div>
-    <!--<div ng-if="company.logo_url == ''">
-        <p>Image No image available</p>
-    </div>-->
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                Num. Followers <span>{{ company.num_followers }}</span>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                MORE INFO
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <accordion>
+            <accordion-group heading="Jobs at {{ company.name }}">
+                <!--ADD BACK  ng-repeat="project in projects | filter: searchText"-->
+<!--{#                <div>#}
+{#                    <a href="#/projects/{{ project.id }}">{{ project.title }}</a>#}
+{#                    <a href="#/users/{{ project.owner.id }}">{{ project.owner.username }}</a>#}
+{#                    <button data-ng-click="projectDescription();">See Description</button>#}
+{#                    <div ng-show="description">#}
+{#                        <div ng-switch="project">#}
+{#                            <div ng-if="project.description">#}
+{#                                <p>Project Description: {{ project.description }}</p>#}
+{#                            </div>#}
+{#                            <div ng-if="project.description == ''">#}
+{#                                <p>Project Description: No description available</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div ng-switch="project">#}
+{#                        <!--{{ project.follower.indexOf(user.id) }}-->#}
+{#                        {{ user }}#}
+{#                        <div ng-if="project.follower.indexOf(project.owner.id)===-1">#}
+{#                            <button data-ng-click="follow(project.id);">Follow</button>#}
+{#                        </div>#}
+{#                        <div ng-if="project.follower.indexOf(project.owner.id)!=-1">#}
+{#                            <button data-ng-click="unfollow(project.id);">Unfollow</button>#}
+{#                        </div>#}
+{#                    </div>#}-->
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
 </div>
-
-overall rating: {{ company.overall_rating }}
-<br>
-culture values rating : {{ company.culture_values_rating }}
-<br>
-senior_leadership_rating : {{ company.senior_leadership_rating }}
-<br>
-compensation_benefits_rating : {{ company.compensation_benefits_rating }}
-<br>
-career_opportunities_rating : {{ company.career_opportunities_rating }}
-<br>
-work_life_balance_rating : {{ company.work_life_balance_rating }}
-<br>
-Number of ratings: {{ company.number_ratings }}
-<br>
-<h4>Overall Rating</h4>
-<donut-chart data="4.2"></donut-chart>
-
-<h4>Senior Leadership Rating</h4>
-<donut-chart data="3.8"></donut-chart>
-<h4>Work/Life Balance Rating</h4>
-<donut-chart data="4"></donut-chart>
+<div class="row company">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Overall Rating</h3>
+          </div>
+          <div class="panel-body">
+            <donut-chart data="4.2"></donut-chart>
+            <!--<donut-chart data="[company.overall_rating]"></donut-chart>-->
+          </div>
+        </div>
+    </div>
+    <div class="class-sm-8">
+        <div class="class-sm-2">
+            <h6>work_life_balance_rating</h6>
+        </div>
+        <div class="class-sm-2">culture values rating</div>
+        <div class="class-sm-2">senior_leadership_rating</div>
+        <div class="class-sm-2">compensation_benefits_rating</div>
+    </div>
+</div>
+<div class="row company">CEO RATINGS IF TIME</div>
+<div class="row company">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Comparison Rating 1</h3>
+          </div>
+          <div class="panel-body">
+              CHART HERE
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Comparison Rating 2</h3>
+          </div>
+          <div class="panel-body">
+              CHART HERE
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row company">
+    STOCK HERE IF TIME
+</div>
 

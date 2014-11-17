@@ -1,20 +1,21 @@
 jobmapper.directive('donutChart', function() {
     function link(scope, element, attr){
 
-        var width = 500;
-            height = 500;
-        //make width and height variable?
+        var width = 300;
+            height = 300;
             τ = 2* Math.PI; // http://tauday.com/tau-manifesto
         var data = scope.data;
-        console.log(data);
+        console.log("top data " + scope.data);
         var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
         console.log("arcValue is " + arcValue);
         // An arc function with all values bound except the endAngle. So, to compute an
         // SVG path string for a given angle, we pass an object with an endAngle
         // property to the `arc` function, and it will return the corresponding string.
         var arc = d3.svg.arc()
-            .innerRadius(180)
-            .outerRadius(240)
+//            .innerRadius(180)
+//            .outerRadius(240)
+            .innerRadius(110)
+            .outerRadius(150)
             .startAngle(-.35 * τ);
 //            .endAngle(function(d) { return (d.value / d.size) * 2 * Math.PI; });
 
@@ -24,7 +25,7 @@ jobmapper.directive('donutChart', function() {
             .attr("width", width)
             .attr("height", height)
           .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
         //Add the background arc, from 0 to 100% (τ).
         var background = svg.append("path")
@@ -99,8 +100,10 @@ jobmapper.directive('donutChart', function() {
             };
           });
         }
-
-
+        scope.$watch('data', function(data){
+          console.log("an element within `data` changed!");
+          console.log("bottom data " + data);
+        }, true);
     }
     return {
         link: link,
