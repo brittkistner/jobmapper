@@ -1,9 +1,11 @@
+//Big donut for overall rating
 jobmapper.directive('donutChart', function() {
     function link(scope, element, attr){
 
         var width = 300;
             height = 300;
             τ = 2* Math.PI; // http://tauday.com/tau-manifesto
+        console.log(data);
         var data = scope.data;
         var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
         console.log("arcValue is " + arcValue);
@@ -58,6 +60,65 @@ jobmapper.directive('donutChart', function() {
     }
 });
 
+//Small donut for rating breakdown
+jobmapper.directive('smallDonutChart', function() {
+    function link(scope, element, attr){
+
+        var width = 150;
+            height = 150;
+            τ = 2* Math.PI; // http://tauday.com/tau-manifesto
+        var data = scope.data;
+        var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
+        console.log("arcValue is " + arcValue);
+
+        var arc = d3.svg.arc()
+            .innerRadius(50)
+            .outerRadius(75)
+            .startAngle(-.35 * τ);
+
+        var svg = d3.select(element[0]).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var background = svg.append("path")
+            .datum({endAngle:.35 * τ})
+            .style("fill", "#ddd")
+            .attr("d", arc);
+
+        var foreground = svg.append("path")
+            .datum({endAngle: -.35 * τ})
+            .style("fill", "#7b6888")
+            .attr("d", arc);
+
+        setInterval(function() {
+          foreground.transition()
+              .duration(750)
+              .call(arcTween, arcValue); //i will set
+        }, 1500);
+
+        function arcTween(transition, newAngle) {
+
+          transition.attrTween("d", function(d) {
+            var interpolate = d3.interpolate(d.endAngle, newAngle);
+            return function(t) {
+              d.endAngle = interpolate(t);
+              return arc(d);
+            };
+          });
+        }
+        scope.$watch('data', function(data){
+//          console.log("an element within `data` changed!");
+//          console.log("bottom data " + data);
+        }, true);
+    }
+    return {
+        link: link,
+        restrict: 'E',
+        scope: { data: '=' }
+    }
+});
 
 jobmapper.directive('barChart', function() {
     function link(scope, element, attr){
@@ -90,8 +151,119 @@ jobmapper.directive('barChart', function() {
             .attr("dy", ".35em")
             .text(function(d) { return d; });
         scope.$watch('data', function(data){
-          console.log("an element within `data` changed!");
-          console.log(data);
+//          console.log("an element within `data` changed!");
+//          console.log(data);
+        }, true);
+    }
+    return {
+        link: link,
+        restrict: 'E',
+        scope: { data: '=' }
+    }
+});
+
+
+//Double Radial Chart for Comparison Rating
+jobmapper.directive('doubleRadius', function() {
+    function link(scope, element, attr){
+    // reference for transition http://jsfiddle.net/Nw62g/1/
+        //original reference http://jsfiddle.net/Qh9X5/154/
+
+        var data = [300,400];
+
+        var width = 460,
+            height = 300,
+            gap = 30;
+
+//        var color = d3.scale.category20();
+
+//        var pie = d3.layout.pie()
+//            .sort(null);
+
+        var arc = d3.svg.arc()
+            .startAngle(-.35 * τ);
+//        var arc = d3.svg.arc()
+//            .innerRadius(50)
+//            .outerRadius(75)
+//            .startAngle(-.35 * τ);
+
+        var svg = d3.select(element[0]).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var gs = svg.selectAll("g").data(d3.values(dataset)).enter().append("g");
+        var path = gs.selectAll("path")
+            .data(function(d) { return arc(d); })
+          .enter().append("path")
+            .attr("fill", function(d, i) { return color(i); })
+            .attr("d", function(d, i, j) { return arc.innerRadius(10+gap*j).outerRadius(gap*(j+1))(d); });
+
+        setInterval(function() {
+          foreground.transition()
+              .duration(750)
+              .call(arcTween, arcValue); //i will set
+        }, 1500);
+
+        function arcTween(transition, newAngle) {
+
+          transition.attrTween("d", function(d) {
+            var interpolate = d3.interpolate(d.endAngle, newAngle);
+            return function(t) {
+              d.endAngle = interpolate(t);
+              return arc(d);
+            };
+          });
+        }
+
+//var width = 150;
+//            height = 150;
+//            τ = 2* Math.PI; // http://tauday.com/tau-manifesto
+//        var data = scope.data;
+//        var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
+//        console.log("arcValue is " + arcValue);
+//
+//        var arc = d3.svg.arc()
+//            .innerRadius(50)
+//            .outerRadius(75)
+//            .startAngle(-.35 * τ);
+//
+//        var svg = d3.select(element[0]).append("svg")
+//            .attr("width", width)
+//            .attr("height", height)
+//          .append("g")
+//            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+//
+//        var background = svg.append("path")
+//            .datum({endAngle:.35 * τ})
+//            .style("fill", "#ddd")
+//            .attr("d", arc);
+//
+//        var foreground = svg.append("path")
+//            .datum({endAngle: -.35 * τ})
+//            .style("fill", "#7b6888")
+//            .attr("d", arc);
+//        setInterval(function() {
+//          foreground.transition()
+//              .duration(750)
+//              .call(arcTween, arcValue); //i will set
+//        }, 1500);
+//
+//        function arcTween(transition, newAngle) {
+//
+//          transition.attrTween("d", function(d) {
+//            var interpolate = d3.interpolate(d.endAngle, newAngle);
+//            return function(t) {
+//              d.endAngle = interpolate(t);
+//              return arc(d);
+//            };
+//          });
+//        }
+
+        scope.$watch('data', function(data){
+//          console.log("an element within `data` changed!");
+//          console.log("bottom data " + data);
         }, true);
     }
     return {

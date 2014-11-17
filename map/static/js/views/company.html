@@ -33,6 +33,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             Image Goes Here
+              <br>
             <!--<div ng-switch="company">
 {#    <div ng-if="company.logo_url">#}
 {#        <img src="{{ company.logo_url }}">#}
@@ -68,7 +69,7 @@
             <h3 class="panel-title">What it's like to work at {{ company.name }}</h3>
           </div>
           <div class="panel-body">
-            Gluten-free Schlitz fap polaroid. Twee Tumblr polaroid bicycle rights +1 wayfarers. Mustache beard chillwave mumblecore, taxidermy master cleanse messenger bag disrupt pug pop-up Vice retro Carles. Chia food truck Thundercats banjo, semiotics paleo Pitchfork American Apparel locavore Helvetica tilde mixtape tote bag. Twee taxidermy cardigan, next level hella synth Banksy heirloom Williamsburg literally. Mlkshk tattooed skateboard chia banjo. Art party High Life heirloom, sriracha lomo plaid scenester chambray gluten-free fixie mumblecore occupy Neutra.
+              {{ company.description }}
           </div>
         </div>
     </div>
@@ -90,10 +91,11 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <h4>work_life_balance_rating</h4>
-                    <!--<donut-chart data="4.2"></donut-chart>-->
+                    <small-donut-chart data="[4.1]"></small-donut-chart>
                 </div>
                 <div class="col-sm-6">
                     <h4>culture values rating</h4>
+                    <small-donut-chart data="[3.5]"></small-donut-chart>
                 </div>
             </div>
         </div>
@@ -101,9 +103,11 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <h4>senior_leadership_rating</h4>
+                    <small-donut-chart data="[3.8]"></small-donut-chart>
                 </div>
                 <div class="col-sm-6">
                     <h4>compensation_benefits_rating</h4>
+                    <small-donut-chart data="[4.5]"></small-donut-chart>
                 </div>
             </div>
         </div>
@@ -129,7 +133,7 @@
             <h3 class="panel-title">Comparison Rating 2</h3>
           </div>
           <div class="panel-body">
-              CHART HERE
+              <double-radius></double-radius>
           </div>
         </div>
     </div>
