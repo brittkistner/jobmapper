@@ -25,6 +25,13 @@ jobmapper.directive('donutChart', function() {
                   .append("g")
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+                var icon = svg.append("text")
+                  .attr('font-family', 'FontAwesome')
+                  .attr('font-size', '18em')
+                  .attr("transform", "translate(-108,90)")
+                  .text("\uf118");
+//                    .attr("class", "icon")
+//                        .text().attr("transform", "translate(0,50");
                 var background = svg.append("path")
                     .datum({endAngle:.35 * τ})
                     .style("fill", "#ddd")
