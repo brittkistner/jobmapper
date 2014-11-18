@@ -1,6 +1,6 @@
 function mapController($scope, $http) {
     console.log('mapController');
-    $http.get('/companies/get_industries')
+    $http.get('/api/companies/get_industries')
         .success(function (industries) {
             $scope.industries = JSON.parse(industries);
         })
@@ -14,7 +14,7 @@ function mapController($scope, $http) {
         console.log(keywords);
         console.log(industry.name);
         console.log(encodeURIComponent(placeName));
-        $http.get('/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName) + '&keywords=' + encodeURIComponent(keywords) + '&industry=' + encodeURIComponent(industry.name))
+        $http.get('/api/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName) + '&keywords=' + encodeURIComponent(keywords) + '&industry=' + encodeURIComponent(industry.name))
             .success(function(combinedObject) {
                 console.log('success');
                 combinedObject = JSON.parse(combinedObject);

@@ -1,4 +1,4 @@
-var jobmapper = angular.module('jobmapper', ['ngRoute','ngResource', 'ui.bootstrap']);
+var jobmapper = angular.module('jobmapper', ['ngRoute','ngResource', 'ui.bootstrap','highcharts-ng']);
 
 jobmapper.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
