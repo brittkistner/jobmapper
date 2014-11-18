@@ -10,7 +10,7 @@ function companyController($scope, $http, $routeParams ) {
             $scope.overallRating = Math.floor(100 * (company.overall_rating/5.0)) + "%";
             if($scope.company.tckr){
                 //Call Quandl api for stock data
-//                getStockData($scope.company.tckr);
+                getStockData($scope.company.tckr);
                 console.log('tckr ' + $scope.company.tckr);
             }else{
                 console.log('no tckr')
@@ -33,52 +33,57 @@ function companyController($scope, $http, $routeParams ) {
         });
 
     //STOCK DATA
-//    var getStockData = function(tckr) {
+    var getStockData = function(tckr) {
 //        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + $scope.company.tckr + '.json')
-//            .done(function(stockData) {
-//                console.log('success');
-//                console.log(stockData.data);
-//    //            stockData returned as this:
-//    //                "column_names": [
-//    //                "Date",
-//    //                "Open",
-//    //                "High",
-//    //                "Low",
-//    //                "Close",
-//    //                "Volume",
-//    //                "Ex-Dividend",
-//    //                "Split Ratio",
-//    //                "Adj. Open",
-//    //                "Adj. High",
-//    //                "Adj. Low",
-//    //                "Adj. Close",
-//    //                "Adj. Volume"
-//    //                ],
-//                var dataset = [];
-//                for (var i=0; i < stockData.data.length; i++ ){
-//                    //convert data to milliseconds
-//                    var dashdates = stockData.data[i][0]; //2013-07-01
-//                    var milliseconds = Date.parse(dashdates);
-//                    var open = stockData.data[i][1];
-//                    dataset.push([milliseconds, open]);
-//                    event.preventDefault();
-//                      //create chart
-//    //                chart_maker(dataset)
-//                }
-//                console.log('dataset');
-//                console.log(dataset)
-//            })
-//            .error(function(error) {
-//                console.log('error');
-//                console.log(error);
-//            });
-//    };
+        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/TWTR.json')
+            .done(function(stockData) {
+                console.log('retrieving stock data');
+                console.log(stockData.data);
+    //            stockData returned as this:
+    //                "column_names": [
+    //                "Date",
+    //                "Open",
+    //                "High",
+    //                "Low",
+    //                "Close",
+    //                "Volume",
+    //                "Ex-Dividend",
+    //                "Split Ratio",
+    //                "Adj. Open",
+    //                "Adj. High",
+    //                "Adj. Low",
+    //                "Adj. Close",
+    //                "Adj. Volume"
+    //                ],
+                var dataset = [];
+                for (var i=0; i < stockData.data.length; i++ ){
+                    //convert data to milliseconds
+                    var dashdates = stockData.data[i][0]; //2013-07-01
+                    var milliseconds = Date.parse(dashdates);
+                    var open = stockData.data[i][1];
+                    dataArray = [milliseconds,open];
+                    dataset.push(dataArray);
+                    event.preventDefault();
+                }
+                console.log('dataset');
+                console.log(dataset[0]);
+              //create chart
+//                chart_maker(dataset);
+//                console.log($scope.chartSeries);
+            })
+            .error(function(error) {
+                console.log('error');
+                console.log(error);
+            });
+    };
 
 
     //HIGHSTOCK BELOW
 
-    var chart_maker = function(data){
-        console.log(data);
+//    var chart_maker = function(data){
+//        console.log('data now in chart maker');
+//        console.log(data);
+//        console.log(data[0]);
         $scope.chartTypes = [
             {"id": "line", "title": "Line"},
             {"id": "spline", "title": "Smooth line"},
@@ -105,15 +110,18 @@ function companyController($scope, $http, $routeParams ) {
         ];
 
         $scope.chartSeries = [
-          {"name": "TCKR",
-//           "data": [[1143072000000,60.16],
-//                    [1143158400000,59.96],
-//                    [1143417600000,59.51]],
-           "data": data,
-           tooltip: {
-              valueDecimals: 4}
+      {"name": "TCKR",
+       "data": [[1143072000000,60.16],
+                [1143158400000,59.96],
+                [1143417600000,59.51]],
+       tooltip: {
+          valueDecimals: 4}
       }];
-
+//        $scope.updateChartData = function() {
+//            var updatedData  = $scope.chartSeries[0].data;
+//            console.log('update data ' + data);
+//            $scope.chartConfig.series[0].data = updatedData.concat(data);
+//        };
         $scope.chartStack = [
         {"id": '', "title": "No"},
         {"id": "normal", "title": "Normal"},
@@ -142,11 +150,14 @@ function companyController($scope, $http, $routeParams ) {
             loading: false,
             size: {}
         };
+//        $scope.updateChartData();
+
+
 
         $scope.reflow = function () {
             $scope.$broadcast('highchartsng.reflow');
         };
-    }
+//    }
 
 
 }
