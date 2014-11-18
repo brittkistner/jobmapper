@@ -64,7 +64,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
         return Response(data)
 
 # def get average num_followers for all companies
-# average_num_followers_for_all_companies = Company.objects.all().aggregate(Avg('overall_rating'))['overall_rating__avg']
+# average_num_followers_for_all_companies = Company.objects.all().aggregate(Avg('num_followers'))['overall_rating__avg']
 
 
 class KeywordViewSet(viewsets.ModelViewSet):

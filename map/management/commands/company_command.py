@@ -2,11 +2,14 @@ from numbers import Number
 from django.core.management import BaseCommand
 from map.models import Company, Keyword
 import csv
+import os
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        print 'hello'
-        with open('management/commands/csv_company.csv', 'rb') as company_file:
+        module_dir = os.path.dirname(__file__)  # get current directory
+        company_file_path = os.path.join(module_dir, 'csv_company.csv')
+        with open(company_file_path, 'rb') as company_file:
             for row in csv.reader(company_file):
                 company = Company.objects.create(  assigned_key = int(row[0]),
                                                    LICID=int(row[1]),
@@ -45,7 +48,8 @@ class Command(BaseCommand):
                 company.geocode(row[8])
                 company.save()
 
-        with open('management/commands/csv_keyword.csv', 'rb') as keyword_file:
+        keyword_file_path = os.path.join(module_dir, 'csv_keyword.csv')
+        with open(keyword_file_path, 'rb') as keyword_file:
             for row in csv.reader(keyword_file):
                 company = Company.objects.get(assigned_key=row[0])
                 keyword = Keyword.objects.create(company=company,
