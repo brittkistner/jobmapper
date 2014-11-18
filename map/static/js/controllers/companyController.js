@@ -8,6 +8,14 @@ function companyController($scope, $http, $routeParams ) {
             console.log(company);
             $scope.company = company;
             $scope.overallRating = Math.floor(100 * (company.overall_rating/5.0)) + "%";
+            if($scope.company.tckr){
+                //Call Quandl api for stock data
+//                getStockData($scope.company.tckr);
+                console.log('tckr ' + $scope.company.tckr);
+            }else{
+                console.log('no tckr')
+            }
+
         })
         .error(function (error) {
             console.log('error');
@@ -24,32 +32,65 @@ function companyController($scope, $http, $routeParams ) {
             console.log(error);
         });
 
-    $http.get('https://www.quandl.com/api/v1/datasets/WIKITWTR/.json')
-        .success(function(stockData) {
-            console.log('success');
-            console.log(stockData);
-        })
-        .error(function(error) {
-            console.log('error');
-            console.log(error);
-        });
+    //STOCK DATA
+//    var getStockData = function(tckr) {
+//        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + $scope.company.tckr + '.json')
+//            .done(function(stockData) {
+//                console.log('success');
+//                console.log(stockData.data);
+//    //            stockData returned as this:
+//    //                "column_names": [
+//    //                "Date",
+//    //                "Open",
+//    //                "High",
+//    //                "Low",
+//    //                "Close",
+//    //                "Volume",
+//    //                "Ex-Dividend",
+//    //                "Split Ratio",
+//    //                "Adj. Open",
+//    //                "Adj. High",
+//    //                "Adj. Low",
+//    //                "Adj. Close",
+//    //                "Adj. Volume"
+//    //                ],
+//                var dataset = [];
+//                for (var i=0; i < stockData.data.length; i++ ){
+//                    //convert data to milliseconds
+//                    var dashdates = stockData.data[i][0]; //2013-07-01
+//                    var milliseconds = Date.parse(dashdates);
+//                    var open = stockData.data[i][1];
+//                    dataset.push([milliseconds, open]);
+//                    event.preventDefault();
+//                      //create chart
+//    //                chart_maker(dataset)
+//                }
+//                console.log('dataset');
+//                console.log(dataset)
+//            })
+//            .error(function(error) {
+//                console.log('error');
+//                console.log(error);
+//            });
+//    };
 
 
     //HIGHSTOCK BELOW
 
+    var chart_maker = function(data){
+        console.log(data);
+        $scope.chartTypes = [
+            {"id": "line", "title": "Line"},
+            {"id": "spline", "title": "Smooth line"},
+            {"id": "area", "title": "Area"},
+            {"id": "areaspline", "title": "Smooth area"},
+            {"id": "column", "title": "Column"},
+            {"id": "bar", "title": "Bar"},
+            {"id": "pie", "title": "Pie"},
+            {"id": "scatter", "title": "Scatter"}
+        ];
 
-    $scope.chartTypes = [
-        {"id": "line", "title": "Line"},
-        {"id": "spline", "title": "Smooth line"},
-        {"id": "area", "title": "Area"},
-        {"id": "areaspline", "title": "Smooth area"},
-        {"id": "column", "title": "Column"},
-        {"id": "bar", "title": "Bar"},
-        {"id": "pie", "title": "Pie"},
-        {"id": "scatter", "title": "Scatter"}
-    ];
-
-    $scope.dashStyles = [
+        $scope.dashStyles = [
         {"id": "Solid", "title": "Solid"},
         {"id": "ShortDash", "title": "ShortDash"},
         {"id": "ShortDot", "title": "ShortDot"},
@@ -61,87 +102,51 @@ function companyController($scope, $http, $routeParams ) {
         {"id": "DashDot", "title": "DashDot"},
         {"id": "LongDashDot", "title": "LongDashDot"},
         {"id": "LongDashDotDot", "title": "LongDashDotDot"}
-    ];
+        ];
 
-    $scope.chartSeries = [
-        {"name": "Some data", "data": [1, 2, 4, 7, 3]},
-        {"name": "Some data 3", "data": [3, 1, null, 5, 2], connectNulls: true},
-        {"name": "Some data 2", "data": [5, 2, 2, 3, 5], type: "column"},
-        {"name": "My Super Column", "data": [1, 1, 2, 3, 2], type: "column"}
-    ];
+        $scope.chartSeries = [
+          {"name": "TCKR",
+//           "data": [[1143072000000,60.16],
+//                    [1143158400000,59.96],
+//                    [1143417600000,59.51]],
+           "data": data,
+           tooltip: {
+              valueDecimals: 4}
+      }];
 
-    $scope.chartStack = [
+        $scope.chartStack = [
         {"id": '', "title": "No"},
         {"id": "normal", "title": "Normal"},
         {"id": "percent", "title": "Percent"}
-    ];
-
-    $scope.addPoints = function () {
-        var seriesArray = $scope.chartConfig.series;
-        var rndIdx = Math.floor(Math.random() * seriesArray.length);
-        seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
-    };
-
-    $scope.addSeries = function () {
-        var rnd = [];
-        for (var i = 0; i < 10; i++) {
-          rnd.push(Math.floor(Math.random() * 20) + 1)
-        }
-        $scope.chartConfig.series.push({
-          data: rnd
-        })
-    };
-
-    $scope.removeRandomSeries = function () {
-        var seriesArray = $scope.chartConfig.series;
-        var rndIdx = Math.floor(Math.random() * seriesArray.length);
-        seriesArray.splice(rndIdx, 1)
-    };
-
-    $scope.removeSeries = function (id) {
-        var seriesArray = $scope.chartConfig.series;
-        seriesArray.splice(id, 1)
-    };
-
-    $scope.toggleHighCharts = function () {
-        this.chartConfig.useHighStocks = !this.chartConfig.useHighStocks
-    };
-
-    $scope.replaceAllSeries = function () {
-        var data = [
-          { name: "first", data: [10] },
-          { name: "second", data: [3] },
-          { name: "third", data: [13] }
         ];
 
-        $scope.chartConfig.series = data;
-    };
 
-    $scope.chartConfig = {
-        options: {
-          chart: {
-            type: 'areaspline'
-          },
-          plotOptions: {
-            series: {
-              stacking: ''
-            }
-          }
-        },
-        series: $scope.chartSeries,
-        title: {
-          text: 'Hello'
-        },
-        credits: {
-          enabled: true
-        },
-        loading: false,
-        size: {}
-    };
+        $scope.chartConfig = {
+            options: {
+              chart: {
+                type: 'line'
+              },
+              plotOptions: {
+                series: {
+                  stacking: ''
+                }
+              }
+            },
+            title: {
+              text: 'Stock Price'
+            },
+            series: $scope.chartSeries,
+            credits: {
+              enabled: false
+            },
+            loading: false,
+            size: {}
+        };
 
-    $scope.reflow = function () {
-        $scope.$broadcast('highchartsng.reflow');
-    };
+        $scope.reflow = function () {
+            $scope.$broadcast('highchartsng.reflow');
+        };
+    }
 
 
 }

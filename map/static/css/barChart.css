@@ -1,12 +1,12 @@
-svg rect {
+bar-chart svg rect {
   fill: #D0743C;
 }
 
-svg rect:hover {
+bar-chart svg rect:hover {
   fill: #6B486B;
 }
 
-svg text {
+bar-chart svg text {
   fill: white;
   font: 3em;
   text-anchor: end;
