@@ -63,7 +63,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
         data = json.dumps(industries)
         return Response(data)
 
-
+# def get average num_followers for all companies
 
 
 

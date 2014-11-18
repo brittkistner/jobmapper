@@ -15,7 +15,7 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 
 #HEROKU
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "demo1.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "jobmapper.settings")
 
 from django.core.wsgi import get_wsgi_application
 from dj_static import Cling
