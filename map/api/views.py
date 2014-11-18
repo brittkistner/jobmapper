@@ -65,6 +65,8 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
 
 
+
+
 class KeywordViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer

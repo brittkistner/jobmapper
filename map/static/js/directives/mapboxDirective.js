@@ -36,8 +36,8 @@ angular.module('jobmapper').directive('mapbox', function($compile, $q) {
       scope.map = L.mapbox.map(element[0], attrs.mapId);
       _mapboxMap.resolve(scope.map);
 
-      var mapWidth = attrs.width || 500;
-      var mapHeight = attrs.height || 500;
+      var mapWidth = attrs.width || 700;
+      var mapHeight = attrs.height || 700;
       element.css('width', mapWidth + 'px');
       element.css('height', mapHeight + 'px');
 //      element.css('width', '100%');
