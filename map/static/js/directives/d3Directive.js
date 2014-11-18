@@ -30,8 +30,7 @@ jobmapper.directive('donutChart', function() {
                   .attr('font-size', '18em')
                   .attr("transform", "translate(-108,90)")
                   .text("\uf118");
-//                    .attr("class", "icon")
-//                        .text().attr("transform", "translate(0,50");
+
                 var background = svg.append("path")
                     .datum({endAngle:.35 * τ})
                     .style("fill", "#ddd")
@@ -73,13 +72,14 @@ jobmapper.directive('donutChart', function() {
 jobmapper.directive('smallDonutChart', function() {
     function link(scope, element, attr){
         scope.$watch('data', function(data){
-            if (data === undefined){
+            if (data[0] === undefined){
               return false;
             }else {
                 var width = 150;
                 height = 150;
                 τ = 2 * Math.PI; // http://tauday.com/tau-manifesto
-                var data = scope.data;
+                var data = scope.data[0];
+                var fontIcon = scope.data[1];
                 var arcValue = ((data / 5) * (0.7 * τ)) - 0.35 * τ;
                 console.log("arcValue is " + arcValue);
 
@@ -93,6 +93,12 @@ jobmapper.directive('smallDonutChart', function() {
                     .attr("height", height)
                     .append("g")
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+                var icon = svg.append("text")
+                  .attr('font-family', 'FontAwesome')
+                  .attr('font-size', '4em')
+                  .attr("transform", "translate(-28,13)")
+                  .text(fontIcon);
 
                 var background = svg.append("path")
                     .datum({endAngle: .35 * τ})
@@ -135,13 +141,12 @@ jobmapper.directive('barChart', function() {
     function link(scope, element, attr){
 //        var data = [500, 3000];
         scope.$watch('data', function(data){
-            if (data === undefined){
+            if (typeof(data[0]) === "undefined" && typeof(data[1]) === "number" ||
+                typeof(data[0]) === "number" && typeof(data[1]) === "undefined"){
+                console.log("data length " + data.length);
               return false;
-            }
-            else if(data.length < 2){
-               return false;
             }else {
-              console.log("bottom data " + data);
+              console.log("data points" + data);
                 var width = 420,
                     barHeight = 60;
 
@@ -165,15 +170,17 @@ jobmapper.directive('barChart', function() {
                     .transition().duration(1000).attr("width", x)
                     .attr("height", barHeight - 1);
 
-                bar.append("text")
-                    .attr("x", function (d) {
-                        return x(d) - 10;
-                    })
-                    .attr("y", barHeight / 2)
-                    .attr("dy", ".35em")
-                    .text(function (d) {
-                        return d;
-                    });
+                    bar.append("text")
+                        .attr("x", function (d) {
+                            console.log('this is d ' + d);
+                            return x(d) - 10;
+                        })
+                        .attr("y", barHeight / 2)
+                        .attr("dy", ".35em")
+                        .attr('font-size', '2em')
+                        .text(function (d) {
+                            return name + 'rating: ' + d;
+                        });
             }
 
         }, true);

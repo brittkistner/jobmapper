@@ -40,6 +40,10 @@ class CompanySerializer(serializers.ModelSerializer):
                   'work_life_balance_rating',
                   'number_ratings',
                   'industry',
+                  'ceo',
+                  'ceo_image',
+                  'ceo_pct_approve',
+                  'ceo_pct_disapprove'
                   )
 
     def get_popularity(self, obj):

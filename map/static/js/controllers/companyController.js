@@ -18,17 +18,14 @@ function companyController($scope, $http, $routeParams ) {
 
         })
         .error(function (error) {
-            console.log('error');
             console.log(error);
         });
 
     $http.get('/api/companies/get_average_num_followers')
         .success(function (avg_num_followers) {
-            console.log(avg_num_followers);
             $scope.avg_num_followers = JSON.parse(avg_num_followers);
         })
         .error(function (error) {
-            console.log('error');
             console.log(error);
         });
 
@@ -37,8 +34,6 @@ function companyController($scope, $http, $routeParams ) {
 //        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + $scope.company.tckr + '.json')
         $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/TWTR.json')
             .done(function(stockData) {
-                console.log('retrieving stock data');
-                console.log(stockData.data);
     //            stockData returned as this:
     //                "column_names": [
     //                "Date",
@@ -65,14 +60,11 @@ function companyController($scope, $http, $routeParams ) {
                     dataset.push(dataArray);
                     event.preventDefault();
                 }
-                console.log('dataset');
-                console.log(dataset[0]);
               //create chart
 //                chart_maker(dataset);
 //                console.log($scope.chartSeries);
             })
             .error(function(error) {
-                console.log('error');
                 console.log(error);
             });
     };

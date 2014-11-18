@@ -8,6 +8,6 @@ bar-chart svg rect:hover {
 
 bar-chart svg text {
   fill: white;
-  font: 3em;
+  /*font: 3em;*/
   text-anchor: end;
 }

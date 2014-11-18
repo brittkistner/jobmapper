@@ -74,11 +74,11 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <h4>work_life_balance_rating</h4>
-                    <small-donut-chart data="company.work_life_balance_rating"></small-donut-chart>
+                    <small-donut-chart data="[company.work_life_balance_rating, '\uf0b1']"></small-donut-chart>
                 </div>
                 <div class="col-sm-6">
                     <h4>culture values rating</h4>
-                    <small-donut-chart data="company.culture_values_rating"></small-donut-chart>
+                    <small-donut-chart data="[company.culture_values_rating, '\uf0fc']"></small-donut-chart>
                 </div>
             </div>
         </div>
@@ -86,30 +86,33 @@
             <div class="col-sm-12">
                 <div class="col-sm-6">
                     <h4>senior_leadership_rating</h4>
-                    <small-donut-chart data="company.senior_leadership_rating"></small-donut-chart>
+                    <small-donut-chart data="[company.senior_leadership_rating, '\uf006']"></small-donut-chart>
                 </div>
                 <div class="col-sm-6">
                     <h4>compensation_benefits_rating</h4>
-                    <small-donut-chart data="company.compensation_benefits_rating"></small-donut-chart>
+                    <small-donut-chart data="[company.compensation_benefits_rating, '\uf0d6']"></small-donut-chart>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!--make this an ng-if for if the picture exists-->
-<div class="row company">
+<div class="row">
     <div class="col-sm-3">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <img src="{{ company.ceo_image.url }}">
-            </div>
-            <div class="panel-footer">{{ company.ceo }}</div>
-        </div>
+        <img src="{{ company.ceo_image }}" width="80px" height="100px">
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-3 company">
         <!--BIG TEXT -->
-        <div class="row"><h1>{{ company.ceo_pct_approve }}</h1></div>
-        <div class="row"><h1>{{ company.ceo_pct_disapprove }}</h1></div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Approval Ratings
+          </div>
+          <div class="panel-body">
+              <h1>{{ company.ceo_pct_approve }}%</h1>
+              <hr>
+              <h1>{{ company.ceo_pct_disapprove }}%</h1>
+          </div>
+        </div>
     </div>
 </div>
 <div class="row company">
@@ -119,8 +122,6 @@
             <h3 class="panel-title">Comparison of Average Number of followers</h3>
           </div>
           <div class="panel-body">
-              {{ company.num_followers }}
-              {{ avg_num_followers }}
               <bar-chart data="[company.num_followers,avg_num_followers]"></bar-chart>
           </div>
         </div>
