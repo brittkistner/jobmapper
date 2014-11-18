@@ -133,3 +133,8 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+
+# ADD to local_settings:
+
+# ALLOWED_HOSTS = []
