@@ -32,7 +32,7 @@
     <div class="col-sm-4">
         <div class="panel panel-default">
           <div class="panel-body">
-            Image Goes Here
+            <a href="{{ company.website_url }}"><img src="{{ company.logo_url }}"></a>
               <br>
             <!--<div ng-switch="company">
 {#    <div ng-if="company.logo_url">#}
@@ -42,12 +42,18 @@
 {#        <p>Image No image available</p>#}
 {#    </div>#}
 {#</div>#}-->
-            Gluten-free Schlitz fap polaroid. Twee Tumblr polaroid bicycle rights +1 wayfarers. Mustache beard chillwave mumblecore, taxidermy master cleanse messenger bag disrupt pug pop-up Vice retro Carles. Chia food truck Thundercats banjo, semiotics paleo Pitchfork American Apparel locavore Helvetica tilde mixtape tote bag. Twee taxidermy cardigan, next level hella synth Banksy heirloom Williamsburg literally. Mlkshk tattooed skateboard chia banjo. Art party High Life heirloom, sriracha lomo plaid scenester chambray gluten-free fixie mumblecore occupy Neutra.
           </div>
-          <div class="panel-footer">Company Name Here</div>
+          <div class="panel-footer">{{ company.name }}</div>
         </div>
     </div>
     <div class="col-sm-4">
+        <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                Founded: {{ company.founded_year }}
+              </div>
+            </div>
+        </div>
         <div class="row">
             <div class="panel panel-default">
               <div class="panel-body">
@@ -58,7 +64,14 @@
         <div class="row">
             <div class="panel panel-default">
               <div class="panel-body">
-                MORE INFO
+                Employee Count Range: <span>{{ company.employee_count_range }}</span>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                Address: <span>{{ company.address }}</span>
               </div>
             </div>
         </div>
@@ -113,7 +126,22 @@
         </div>
     </div>
 </div>
-<div class="row company">CEO RATINGS IF TIME</div>
+<!--make this an ng-if for if the picture exists-->
+<div class="row company">
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <img src="{{ company.ceo_image.url }}">
+            </div>
+            <div class="panel-footer">{{ company.ceo }}</div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <!--BIG TEXT -->
+        <div class="row"><h1>{{ company.ceo_pct_approve }}</h1></div>
+        <div class="row"><h1>{{ company.ceo_pct_disapprove }}</h1></div>
+    </div>
+</div>
 <div class="row company">
     <div class="col-md-6">
         <div class="panel panel-default">
@@ -121,9 +149,9 @@
             <h3 class="panel-title">Comparison of Average Number of followers</h3>
           </div>
           <div class="panel-body">
-              <bar-chart data="[company.num_followers,500]"></bar-chart>
-<!--{#              {{ company.num_followers }}#}-->
-              <!--get average num followers across all companies, do this in controller -->
+              {{ company.num_followers }}
+              {{ avg_num_followers }}
+              <bar-chart data="[company.num_followers,avg_num_followers]"></bar-chart>
           </div>
         </div>
     </div>

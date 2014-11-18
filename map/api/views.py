@@ -2,6 +2,7 @@ import json
 import urllib
 # import django_filters
 from django.core import serializers
+from django.db.models import Avg
 from rest_framework import viewsets, status
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
@@ -55,17 +56,23 @@ class CompanyViewSet(viewsets.ModelViewSet):
     #Route to retrieve all non-duplicate industries within the Company table
     @list_route()
     def get_industries(self, request):
+        print "hello"
         companies = Company.objects.all()
         industries = []
         for company in companies:
             if not any(d['name'] == company.industry.upper() for d in industries) and company.industry != '':
                 industries.append({'name': company.industry.upper()})
+        print industries
         data = json.dumps(industries)
         return Response(data)
 
-# def get average num_followers for all companies
-# average_num_followers_for_all_companies = Company.objects.all().aggregate(Avg('num_followers'))['overall_rating__avg']
-
+    @list_route()
+    def get_average_num_followers(self, request):
+        print "hello"
+        average_num_followers_for_all_companies = int(Company.objects.all().aggregate(Avg('num_followers'))['num_followers__avg'])
+        print average_num_followers_for_all_companies
+        data = json.dumps(average_num_followers_for_all_companies)
+        return Response(data)
 
 class KeywordViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()

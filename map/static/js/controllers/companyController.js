@@ -14,5 +14,14 @@ function companyController($scope, $http, $routeParams ) {
             console.log(error);
         });
 
+    $http.get('/companies/get_average_num_followers')
+        .success(function (avg_num_followers) {
+            console.log(avg_num_followers);
+            $scope.avg_num_followers = JSON.parse(avg_num_followers);
+        })
+        .error(function (error) {
+            console.log('error');
+            console.log(error);
+        });
 
 }

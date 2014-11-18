@@ -14,14 +14,13 @@
 <div class="row">
     <div class="col-xs-6">
         <div id="map">
-        <!--{#    <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.lat }}" lng="{{ location.lng }}">#}-->
             <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.latitude }}" lng="{{ location.longitude}}" zoom="13">
                 <div ng-repeat="company in companies">
-{#                    <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">#}
-{#                       <h1>{{company.name}}</h1>#}
-{#                            what other information do you want to add here?#}
-{#                       <a href="#/companies/{{ company.assigned_key }}">Company Page</a>#}
-{#                    </marker>#}
+                    <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">
+                       <h1>{{company.name}}</h1>
+                            what other information do you want to add here?
+                       <a href="#/companies/{{ company.assigned_key }}">Company Page</a>
+                    </marker>
                 </div>
             </mapbox>
         </div>

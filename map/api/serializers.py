@@ -42,14 +42,13 @@ class CompanySerializer(serializers.ModelSerializer):
                   'industry',
                   )
 
-    # def get_keywords(self, obj):
-    #     return obj.keywords
-
     def get_popularity(self, obj):
         average_overall_rating_for_all_companies = Company.objects.all().aggregate(Avg('overall_rating'))['overall_rating__avg'] #Keep this for overall rating across all industries
         single_company_overall_rating = obj.overall_rating
         company_popularity_comparison = obj.overall_rating/average_overall_rating_for_all_companies
         return company_popularity_comparison
+
+
 
 
 class KeywordSerializer(serializers.ModelSerializer):

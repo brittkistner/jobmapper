@@ -3,8 +3,6 @@ jobmapper.directive('donutChart', function() {
     function link($scope, element, attr){
         $scope.$watch('data', function(data){
           if (data === undefined){
-              console.log("an element within `data` changed!");
-              console.log("bottom data " + data);
               return false;
           }else{
               console.log("an element within `data` changed!");
@@ -69,8 +67,6 @@ jobmapper.directive('smallDonutChart', function() {
     function link(scope, element, attr){
         scope.$watch('data', function(data){
             if (data === undefined){
-              console.log("an element within `data` changed!");
-              console.log("bottom data " + data);
               return false;
             }else {
                 var width = 150;
@@ -133,11 +129,12 @@ jobmapper.directive('barChart', function() {
 //        var data = [500, 3000];
         scope.$watch('data', function(data){
             if (data === undefined){
-              console.log("an element within `data` changed!");
-              console.log("bottom data " + data);
               return false;
+            }
+            else if(data.length < 2){
+               return false;
             }else {
-//                var data = scope.data;
+              console.log("bottom data " + data);
                 var width = 420,
                     barHeight = 60;
 
