@@ -38,15 +38,17 @@ class Command(BaseCommand):
                                                    career_opportunities_rating=float(row[24]),
                                                    work_life_balance_rating=float(row[25]),
                                                    number_ratings=int(row[26]),
-                                                   industry=row[27].lower(),)
-                                                   # ceo=row[28],
-                                                   # ceo_image=row[29],
-                                                   # ceo_num_rating=row[30],
-                                                   # ceo_pct_approve=row[31],
-                                                   # ceo_pct_disapprove=row[32])
+                                                   industry=row[27].lower(),
+                                                   ceo=row[28],
+                                                   ceo_image=row[29],
+                                                   ceo_num_rating=row[30],
+                                                   ceo_pct_approve=int(row[31]),
+                                                   ceo_pct_disapprove=int(row[32])
+                )
 
                 company.geocode(row[8])
                 company.save()
+                print company
 
         keyword_file_path = os.path.join(module_dir, 'csv_keyword.csv')
         with open(keyword_file_path, 'rb') as keyword_file:
