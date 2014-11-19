@@ -17,7 +17,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
     #Return a set of companies based on location, industry, and keyword searches
     @list_route()
     def get_companies_by_location(self, request):
-
         #Get keywords and split strings into array
         keywords = self.request.QUERY_PARAMS.get('keywords', None)
         keywords = keywords.split(',')

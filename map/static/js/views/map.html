@@ -1,18 +1,5 @@
-<span>Search By Place</span>
-<input ng-model="placeName" type="text" placeholder="San Francisco, CA">
-<br>
-<span>Which industry:</span>
-<select ng-model="industry"  ng-options="industry.name for industry in industries"></select>
-<br>
-<span>Keywords:</span>
-<input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">
-<br>
-<button data-ng-click="searchCompany(placeName, keywords, industry);">Search</button>
-
-
-<!--hide the div-->
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-sm-9">
         <div id="map">
             <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.latitude }}" lng="{{ location.longitude}}" zoom="13">
                 <div ng-repeat="company in companies">
@@ -25,5 +12,18 @@
             </mapbox>
         </div>
     </div>
+    <div class="col-sm-3">
+        <form>
+            <span>Search By Place</span>
+            <input ng-model="placeName" type="text" placeholder="San Francisco, CA">
+            <br>
+            <span>Which industry:</span>
+            <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>
+            <br>
+            <span>Keywords:</span>
+            <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">
+            <br>
+            <button data-ng-click="searchCompany(placeName, keywords, industry);">Search</button>
+        </form>
+    </div>
 </div>
-

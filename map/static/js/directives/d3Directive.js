@@ -141,30 +141,34 @@ jobmapper.directive('barChart', function() {
     function link(scope, element, attr){
 //        var data = [500, 3000];
         scope.$watch('data', function(data){
-            if (typeof(data[0]) === "undefined" && typeof(data[1]) === "number" ||
-                typeof(data[0]) === "number" && typeof(data[1]) === "undefined"){
+            if (typeof(data[0].value) === "undefined" && typeof(data[1].value) === "undefined" ||
+                typeof(data[0].value) === "undefined" && typeof(data[1].value) === "number" ||
+                typeof(data[0].value) === "number" && typeof(data[1].value) === "undefined"){
                 console.log("data length " + data.length);
               return false;
             }else {
-              console.log("data points" + data);
+              console.log("data points" + data[0].name);
+              var dValues =[];
+              for (var i=0; i < 2; i++){
+                  dValues.push(data[i].value);
+                }
+              console.log(dValues);
                 var width = 420,
                     barHeight = 60;
 
                 var x = d3.scale.linear()
-                    .domain([0, d3.max(data)])
+                    .domain([0, d3.max(dValues)])
                     .range([0, width]);
 
                 var chart = d3.select(element[0]).append("svg")
                     .attr("width", width)
-                    .attr("height", barHeight * data.length);
-
+                    .attr("height", barHeight * dValues.length);
                 var bar = chart.selectAll("g")
-                    .data(data)
+                    .data(dValues)
                     .enter().append("g")
                     .attr("transform", function (d, i) {
                         return "translate(0," + i * barHeight + ")";
                     });
-
                 var rect = bar.append("rect");
                 rect.attr("width", 0)
                     .transition().duration(1000).attr("width", x)
@@ -177,11 +181,52 @@ jobmapper.directive('barChart', function() {
                         })
                         .attr("y", barHeight / 2)
                         .attr("dy", ".35em")
-                        .attr('font-size', '2em')
-                        .text(function (d) {
-                            return name + 'rating: ' + d;
+                        .attr('font-size', '1.2em')
+                        .text(function (d,i) {
+                            return data[i].name + ' : ' + d;
                         });
             }
+//            if (typeof(data[0]) === "undefined" && typeof(data[1]) === "number" ||
+//                typeof(data[0]) === "number" && typeof(data[1]) === "undefined"){
+//                console.log("data length " + data.length);
+//              return false;
+//            }else {
+//              console.log("data points" + data);
+//                var width = 420,
+//                    barHeight = 60;
+//
+//                var x = d3.scale.linear()
+//                    .domain([0, d3.max(data)])
+//                    .range([0, width]);
+//
+//                var chart = d3.select(element[0]).append("svg")
+//                    .attr("width", width)
+//                    .attr("height", barHeight * data.length);
+//
+//                var bar = chart.selectAll("g")
+//                    .data(data)
+//                    .enter().append("g")
+//                    .attr("transform", function (d, i) {
+//                        return "translate(0," + i * barHeight + ")";
+//                    });
+//
+//                var rect = bar.append("rect");
+//                rect.attr("width", 0)
+//                    .transition().duration(1000).attr("width", x)
+//                    .attr("height", barHeight - 1);
+//
+//                    bar.append("text")
+//                        .attr("x", function (d) {
+//                            console.log('this is d ' + d);
+//                            return x(d) - 10;
+//                        })
+//                        .attr("y", barHeight / 2)
+//                        .attr("dy", ".35em")
+//                        .attr('font-size', '2em')
+//                        .text(function (d) {
+//                            return name + 'rating: ' + d;
+//                        });
+//            }
 
         }, true);
     }
