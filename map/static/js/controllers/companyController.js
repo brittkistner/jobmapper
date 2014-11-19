@@ -56,13 +56,14 @@ function companyController($scope, $http, $routeParams ) {
                     var dashdates = stockData.data[i][0]; //2013-07-01
                     var milliseconds = Date.parse(dashdates);
                     var open = stockData.data[i][1];
-                    dataArray = [milliseconds,open];
+                    var dataArray = [milliseconds,open];
                     dataset.push(dataArray);
                     event.preventDefault();
                 }
               //create chart
-//                chart_maker(dataset);
-//                console.log($scope.chartSeries);
+                chart_maker(dataset);
+                console.log("this is dataset " + dataset);
+                console.log($scope.chartSeries);
             })
             .error(function(error) {
                 console.log(error);
@@ -72,10 +73,11 @@ function companyController($scope, $http, $routeParams ) {
 
     //HIGHSTOCK BELOW
 
-//    var chart_maker = function(data){
-//        console.log('data now in chart maker');
-//        console.log(data);
-//        console.log(data[0]);
+
+    var chart_maker = function(data){
+        console.log('data now in chart maker');
+        console.log(data);
+        // console.log(data[0]);
         $scope.chartTypes = [
             {"id": "line", "title": "Line"},
             {"id": "spline", "title": "Smooth line"},
@@ -102,13 +104,14 @@ function companyController($scope, $http, $routeParams ) {
         ];
 
         $scope.chartSeries = [
-      {"name": "TCKR",
-       "data": [[1143072000000,60.16],
-                [1143158400000,59.96],
-                [1143417600000,59.51]],
+            {"name": "TCKR",
+//       "data": [[1143072000000,60.16],
+//                [1143158400000,59.96],
+//                [1143417600000,59.51]],
+        "data": data ? data.slice(0,10) : [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51]],
        tooltip: {
           valueDecimals: 4}
-      }];
+            }];
 //        $scope.updateChartData = function() {
 //            var updatedData  = $scope.chartSeries[0].data;
 //            console.log('update data ' + data);
@@ -142,6 +145,7 @@ function companyController($scope, $http, $routeParams ) {
             loading: false,
             size: {}
         };
+        console.log($scope.chartConfig);
 //        $scope.updateChartData();
 
 
@@ -149,7 +153,8 @@ function companyController($scope, $http, $routeParams ) {
         $scope.reflow = function () {
             $scope.$broadcast('highchartsng.reflow');
         };
-//    }
+    }
+    chart_maker(null);
 
 
 }

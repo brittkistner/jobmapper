@@ -19,13 +19,15 @@ class CompanyViewSet(viewsets.ModelViewSet):
     def get_companies_by_location(self, request):
         #Get keywords and split strings into array
         keywords = self.request.QUERY_PARAMS.get('keywords', None)
-        keywords = keywords.split(',')
+        if keywords:
+            keywords = keywords.split(',')
 
-        print keywords
+            print keywords
 
         #Get industry value
         industry = self.request.QUERY_PARAMS.get('industry', None)
-        print industry
+        if industry:
+            print industry
 
         #Get location data and pass through google api geocoder
         location = self.request.QUERY_PARAMS.get('location', None)
@@ -39,8 +41,15 @@ class CompanyViewSet(viewsets.ModelViewSet):
             queryset = Company.objects.all()
 
             #Filter companies my the minimum and maximum latitude and longitude to form a square range
-            # filter_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01, keywords__word__in=keywords)
-            filter_query = queryset.filter(latitude__gt=my_lat-.01, latitude__lt=my_lat+.01, longitude__gt=my_lng-.01, longitude__lt=my_lng+.01, industry__iexact=industry, keywords__word__in=keywords)
+            if keywords and industry:
+                filter_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02, industry__iexact=industry, keywords__word__in=keywords)
+            elif keywords:
+                filter_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02, keywords__word__in=keywords)
+            elif industry:
+                filter_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02, industry__iexact=industry)
+            else:
+                filter_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02)
+
             print filter_query
             location = {
                 "latitude": my_lat,

@@ -13,8 +13,7 @@
         </div>
     </div>
     <div class="col-sm-3">
-        <form>
-            <span>Search By Place</span>
+             <span>Search By Place</span>
             <input ng-model="placeName" type="text" placeholder="San Francisco, CA">
             <br>
             <span>Which industry:</span>
@@ -24,6 +23,16 @@
             <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">
             <br>
             <button data-ng-click="searchCompany(placeName, keywords, industry);">Search</button>
-        </form>
+<!--{#        <form name="searchForm" ng-submit="reviewForm.$valid && searchCompany(placeName, keywords, industry);" novalidate>#}
+{#            <label>Search By Place</label>#}
+{#            <input ng-model="placeName" type="text" placeholder="San Francisco, CA" required>#}
+{#            <br>#}
+{#            <label>Which industry:</label>#}
+{#            <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>#}
+{#            <br>#}
+{#            <label>Keywords:</label>#}
+{#            <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">#}
+{#            <input type="submit" value="Submit"/>#}
+{#        </form>#}-->
     </div>
 </div>

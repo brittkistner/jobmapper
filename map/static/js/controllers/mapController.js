@@ -10,11 +10,11 @@ function mapController($scope, $http) {
         });
 
     $scope.searchCompany = function(placeName, keywords, industry) {
-        console.log(placeName);
-        console.log(keywords);
-        console.log(industry.name);
+//        console.log(placeName);
+//        console.log(keywords);
+//        console.log(industry.name);
         console.log(encodeURIComponent(placeName));
-        $http.get('/api/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName) + '&keywords=' + encodeURIComponent(keywords) + '&industry=' + encodeURIComponent(industry.name))
+        $http.get('/api/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName) + (keywords ? '&keywords=' + encodeURIComponent(keywords) : '') + (industry ? '&industry=' + encodeURIComponent(industry.name) : ''))
             .success(function(combinedObject) {
                 console.log('success');
                 combinedObject = JSON.parse(combinedObject);
