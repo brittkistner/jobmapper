@@ -17,16 +17,22 @@
 }
 .angular-mapbox-map {
   min-width: 100%;
-  /*height: 300px;*/
-}
-pre.prettyprint {
-  border: 0;
 }
 
-/*.ng-invalid.ng-dirty{*/
-    /*border-color: red;*/
-/*}*/
 
-/*.ng-valid.ng-dirty{*/
-    /*border-color: green;*/
-/*}*/
+.ng-invalid.ng-dirty{
+    border-color: #E80C47;
+}
+
+.ng-valid.ng-dirty{
+    border-color: #FD8C25;
+}
+
+.leaflet-popup-content h1{
+    color: #FD8C25;
+    font-size: 1.5em;
+}
+
+.leaflet-popup-content a{
+    color: #6B486B;
+}

@@ -1,38 +1,36 @@
 <div class="row">
     <div class="col-sm-9">
         <div id="map">
-            <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.latitude }}" lng="{{ location.longitude}}" zoom="13">
+<!--{#            <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.latitude }}" lng="{{ location.longitude}}" zoom="13">#}-->
+            <mapbox map-id="bkistner.k0m7ndk8" lat="37.7833" lng="-122.4167" zoom="13">
                 <div ng-repeat="company in companies">
                     <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">
                        <h1>{{company.name}}</h1>
-                            what other information do you want to add here?
-                       <a href="#/companies/{{ company.assigned_key }}">Company Page</a>
+                        <p>Industry: {{ company.industry }}</p>
+                        <p>Company Size: {{ company.employee_count_range }}</p>
+                        <p>Rating: {{ company.overall_rating }}</p>
+                       <a href="#/companies/{{ company.assigned_key }}">More Info</a>
                     </marker>
                 </div>
             </mapbox>
         </div>
     </div>
     <div class="col-sm-3">
-             <span>Search By Place</span>
-            <input ng-model="placeName" type="text" placeholder="San Francisco, CA">
-            <br>
-            <span>Which industry:</span>
-            <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>
-            <br>
-            <span>Keywords:</span>
-            <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">
-            <br>
-            <button data-ng-click="searchCompany(placeName, keywords, industry);">Search</button>
-<!--{#        <form name="searchForm" ng-submit="reviewForm.$valid && searchCompany(placeName, keywords, industry);" novalidate>#}
-{#            <label>Search By Place</label>#}
-{#            <input ng-model="placeName" type="text" placeholder="San Francisco, CA" required>#}
-{#            <br>#}
-{#            <label>Which industry:</label>#}
-{#            <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>#}
-{#            <br>#}
-{#            <label>Keywords:</label>#}
-{#            <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas">#}
-{#            <input type="submit" value="Submit"/>#}
-{#        </form>#}-->
+        <form name="mapForm" role="form" class="form-horizontal" novalidate >
+            <div class="form-group">
+                <label for="locationInput">Search By Place</label>
+                <input ng-model="placeName" type="text" placeholder="San Francisco, CA" class="form-control" id="locationInput" required>
+            </div>
+            <div class="form-group">
+                <label for="locationInput">Industry</label>
+                <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>
+            </div>
+            <div class="form-group">
+                <label for="keywordInput">Keyword(s)</label>
+                <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas" class="form-control" id="keywordInput" required>
+            </div>
+            <div>mapForm is {{ mapForm.$valid }}</div>
+            <button ng-click="searchCompany(placeName, keywords, industry);" type="submit" class="btn btn-default" >Search</button>
+        </form>
     </div>
 </div>
