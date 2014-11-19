@@ -1,4 +1,4 @@
-function companyController($scope, $http, $routeParams ) {
+function companyController($scope, $http, $routeParams, $timeout) {
     console.log('companyController');
     $scope.companyId = $routeParams.companyId;
 //    console.log($scope.companyId);
@@ -31,7 +31,6 @@ function companyController($scope, $http, $routeParams ) {
 
     //STOCK DATA
     var getStockData = function(tckr) {
-        console.log('im called');
         $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + $scope.company.tckr + '.json')
 //        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/TWTR.json')
             .done(function(stockData) {
@@ -63,8 +62,7 @@ function companyController($scope, $http, $routeParams ) {
                 }
               //create chart
                 chart_maker(dataset);
-                console.log("this is dataset " + dataset);
-                console.log($scope.chartSeries);
+//                console.log("this is dataset " + dataset);
             })
             .error(function(error) {
                 console.log(error);
@@ -76,9 +74,6 @@ function companyController($scope, $http, $routeParams ) {
 
 
     var chart_maker = function(data){
-        console.log('data now in chart maker');
-        console.log(data);
-        // console.log(data[0]);
         $scope.chartTypes = [
             {"id": "line", "title": "Line"},
             {"id": "spline", "title": "Smooth line"},
@@ -109,17 +104,17 @@ function companyController($scope, $http, $routeParams ) {
 //       "data": [[1143072000000,60.16],
 //                [1143158400000,59.96],
 //                [1143417600000,59.51]],
-        "data": data ? data.slice(0,10) : [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51], [1416182400000,41.45],],
+        "data": data ? data: [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51], [1416182400000,41.45],],
 //          "data": data ? data.slice(0,10) : '',
 
        tooltip: {
           valueDecimals: 4}
             }];
-        $scope.updateChartData = function() {
-            var updatedData  = $scope.chartSeries[0].data;
-            console.log('update data ' + data);
-            $scope.chartConfig.series[0].data = updatedData.concat(data);
-        };
+//        $scope.updateChartData = function() {
+//            var updatedData  = $scope.chartSeries[0].data;
+////            console.log('update data ' + data);
+//            $scope.chartConfig.series[0].data = updatedData.concat(data);
+//        };
         $scope.chartStack = [
         {"id": '', "title": "No"},
         {"id": "normal", "title": "Normal"},
@@ -149,15 +144,16 @@ function companyController($scope, $http, $routeParams ) {
             size: {}
         };
         console.log($scope.chartConfig);
-        $scope.updateChartData();
+//        $scope.updateChartData();
 
 
 
         $scope.reflow = function () {
             $scope.$broadcast('highchartsng.reflow');
         };
-    }
-    chart_maker(null);
+        $scope.$apply();
+    };
+//    chart_maker(null);
 
 
 }
