@@ -5,14 +5,10 @@ jobmapper.directive('donutChart', function() {
           if (data === undefined){
               return false;
           }else{
-              console.log("an element within `data` changed!");
-              console.log("bottom data " + data);
                 var width = 300;
                     height = 300;
                     τ = 2* Math.PI; // http://tauday.com/tau-manifesto
-    //            var data = $scope.data;
                 var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
-                console.log("arcValue is " + arcValue);
 
                 var arc = d3.svg.arc()
                     .innerRadius(110)
@@ -31,6 +27,12 @@ jobmapper.directive('donutChart', function() {
                   .attr("transform", "translate(-108,90)")
                   .text("\uf118");
 
+              var rating = svg.append("text")
+                  .attr('font-family', 'Raleway')
+                  .attr('font-size', '2.5em')
+                  .attr("transform", "translate(-25,140)")
+                  .text(data); //insert data
+
                 var background = svg.append("path")
                     .datum({endAngle:.35 * τ})
                     .style("fill", "#ddd")
@@ -45,7 +47,7 @@ jobmapper.directive('donutChart', function() {
                 setInterval(function() {
                   foreground.transition()
                       .duration(750)
-                      .call(arcTween, arcValue); //i will set
+                      .call(arcTween, arcValue);
                 }, 1500);
 
                 function arcTween(transition, newAngle) {
@@ -81,7 +83,6 @@ jobmapper.directive('smallDonutChart', function() {
                 var data = scope.data[0];
                 var fontIcon = scope.data[1];
                 var arcValue = ((data / 5) * (0.7 * τ)) - 0.35 * τ;
-                console.log("arcValue is " + arcValue);
 
                 var arc = d3.svg.arc()
                     .innerRadius(50)
@@ -99,6 +100,12 @@ jobmapper.directive('smallDonutChart', function() {
                   .attr('font-size', '4em')
                   .attr("transform", "translate(-28,13)")
                   .text(fontIcon);
+
+                var rating = svg.append("text")
+                  .attr('font-family', 'Raleway')
+                  .attr('font-size', '2em')
+                  .attr("transform", "translate(-15,55)")
+                  .text(data); //insert data
 
                 var background = svg.append("path")
                     .datum({endAngle: .35 * τ})
@@ -139,20 +146,16 @@ jobmapper.directive('smallDonutChart', function() {
 
 jobmapper.directive('barChart', function() {
     function link(scope, element, attr){
-//        var data = [500, 3000];
         scope.$watch('data', function(data){
             if (typeof(data[0].value) === "undefined" && typeof(data[1].value) === "undefined" ||
                 typeof(data[0].value) === "undefined" && typeof(data[1].value) === "number" ||
                 typeof(data[0].value) === "number" && typeof(data[1].value) === "undefined"){
-                console.log("data length " + data.length);
               return false;
             }else {
-              console.log("data points" + data[0].name);
               var dValues =[];
               for (var i=0; i < 2; i++){
                   dValues.push(data[i].value);
                 }
-              console.log(dValues);
                 var width = 420,
                     barHeight = 60;
 
@@ -176,7 +179,6 @@ jobmapper.directive('barChart', function() {
 
                     bar.append("text")
                         .attr("x", function (d) {
-                            console.log('this is d ' + d);
                             return x(d) - 10;
                         })
                         .attr("y", barHeight / 2)
@@ -186,47 +188,6 @@ jobmapper.directive('barChart', function() {
                             return data[i].name + ' : ' + d;
                         });
             }
-//            if (typeof(data[0]) === "undefined" && typeof(data[1]) === "number" ||
-//                typeof(data[0]) === "number" && typeof(data[1]) === "undefined"){
-//                console.log("data length " + data.length);
-//              return false;
-//            }else {
-//              console.log("data points" + data);
-//                var width = 420,
-//                    barHeight = 60;
-//
-//                var x = d3.scale.linear()
-//                    .domain([0, d3.max(data)])
-//                    .range([0, width]);
-//
-//                var chart = d3.select(element[0]).append("svg")
-//                    .attr("width", width)
-//                    .attr("height", barHeight * data.length);
-//
-//                var bar = chart.selectAll("g")
-//                    .data(data)
-//                    .enter().append("g")
-//                    .attr("transform", function (d, i) {
-//                        return "translate(0," + i * barHeight + ")";
-//                    });
-//
-//                var rect = bar.append("rect");
-//                rect.attr("width", 0)
-//                    .transition().duration(1000).attr("width", x)
-//                    .attr("height", barHeight - 1);
-//
-//                    bar.append("text")
-//                        .attr("x", function (d) {
-//                            console.log('this is d ' + d);
-//                            return x(d) - 10;
-//                        })
-//                        .attr("y", barHeight / 2)
-//                        .attr("dy", ".35em")
-//                        .attr('font-size', '2em')
-//                        .text(function (d) {
-//                            return name + 'rating: ' + d;
-//                        });
-//            }
 
         }, true);
     }

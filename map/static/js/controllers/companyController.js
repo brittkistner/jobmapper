@@ -13,7 +13,7 @@ function companyController($scope, $http, $routeParams ) {
                 getStockData($scope.company.tckr);
                 console.log('tckr ' + $scope.company.tckr);
             }else{
-                console.log('no tckr')
+                console.log('no tckr');
             }
 
         })
@@ -31,8 +31,9 @@ function companyController($scope, $http, $routeParams ) {
 
     //STOCK DATA
     var getStockData = function(tckr) {
-//        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + $scope.company.tckr + '.json')
-        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/TWTR.json')
+        console.log('im called');
+        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/' + $scope.company.tckr + '.json')
+//        $.getJSON('https://www.quandl.com/api/v1/datasets/WIKI/TWTR.json')
             .done(function(stockData) {
     //            stockData returned as this:
     //                "column_names": [
@@ -108,7 +109,7 @@ function companyController($scope, $http, $routeParams ) {
 //       "data": [[1143072000000,60.16],
 //                [1143158400000,59.96],
 //                [1143417600000,59.51]],
-        "data": data ? data.slice(0,10) : [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51]],
+        "data": data ? data.slice(0,10) : [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51], [1416182400000,41.45], [40.73,1415232000000], [40.18,1415059200000] ],
        tooltip: {
           valueDecimals: 4}
             }];
