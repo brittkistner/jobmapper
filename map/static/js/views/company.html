@@ -1,7 +1,12 @@
 <div class="row">
-    <div class="col-sm-8 col-sm-offset-3"> <!--container starts here-->
+    <div class="col-sm-12 col-sm-offset-1"> <!--container starts here-->
         <div class="row">
-
+            <div class="col-sm-3">
+                <a href="{{ company.website_url }}"><img src="{{ company.logo_url }}"></a>
+            </div>
+            <div class="col-sm-9">
+                <div>{{ company.name }}</div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -34,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="panel panel-default overall-rating">
                   <div class="panel-heading">
                     <h3 class="panel-title">What it's like to work at {{ company.name }}</h3>
@@ -46,9 +51,44 @@
             </div>
         </div>
         <!--more here-->
-
-        <div class="row">
-
+        <div class="row company">
+            <div class="col-sm-4">
+                <div class="panel panel-default overall-rating">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Overall Rating</h3>
+                  </div>
+                  <div class="panel-body">
+                    <!--<donut-chart data="[4.2]"></donut-chart>-->
+                    <donut-chart data="company.overall_rating"></donut-chart>
+                  </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h4>Work/Life Balance</h4>
+                            <small-donut-chart data="[company.work_life_balance_rating, '\uf0b1']"></small-donut-chart>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Culture and Values</h4>
+                            <small-donut-chart data="[company.culture_values_rating, '\uf0fc']"></small-donut-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h4>Senior Leadership</h4>
+                            <small-donut-chart data="[company.senior_leadership_rating, '\uf006']"></small-donut-chart>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Compensation and Benefits</h4>
+                            <small-donut-chart data="[company.compensation_benefits_rating, '\uf0d6']"></small-donut-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
 
