@@ -109,15 +109,17 @@ function companyController($scope, $http, $routeParams ) {
 //       "data": [[1143072000000,60.16],
 //                [1143158400000,59.96],
 //                [1143417600000,59.51]],
-        "data": data ? data.slice(0,10) : [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51], [1416182400000,41.45], [40.73,1415232000000], [40.18,1415059200000] ],
+        "data": data ? data.slice(0,10) : [[1143072000000,60.16],[1143158400000,59.96],[1143417600000,59.51], [1416182400000,41.45],],
+//          "data": data ? data.slice(0,10) : '',
+
        tooltip: {
           valueDecimals: 4}
             }];
-//        $scope.updateChartData = function() {
-//            var updatedData  = $scope.chartSeries[0].data;
-//            console.log('update data ' + data);
-//            $scope.chartConfig.series[0].data = updatedData.concat(data);
-//        };
+        $scope.updateChartData = function() {
+            var updatedData  = $scope.chartSeries[0].data;
+            console.log('update data ' + data);
+            $scope.chartConfig.series[0].data = updatedData.concat(data);
+        };
         $scope.chartStack = [
         {"id": '', "title": "No"},
         {"id": "normal", "title": "Normal"},
@@ -147,7 +149,7 @@ function companyController($scope, $http, $routeParams ) {
             size: {}
         };
         console.log($scope.chartConfig);
-//        $scope.updateChartData();
+        $scope.updateChartData();
 
 
 

@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-9 map">
         <div id="map">
 <!--{#            <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.latitude }}" lng="{{ location.longitude}}" zoom="13">#}-->
-            <mapbox map-id="bkistner.k0m7ndk8" lat="37.7833" lng="-122.4167" zoom="13">
+            <mapbox map-id="bkistner.a15e6a6c" lat="37.7833" lng="-122.4167" zoom="13">
                 <div ng-repeat="company in companies">
-                    <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#39cccc" symbol="ferry">
+                    <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#7B6888" symbol="ferry">
                        <h1>{{company.name}}</h1>
                         <p>Industry: {{ company.industry }}</p>
                         <p>Company Size: {{ company.employee_count_range }}</p>
