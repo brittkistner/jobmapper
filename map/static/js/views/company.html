@@ -1,17 +1,66 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-3"> <!--container starts here-->
+        <div class="row">
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        Founded: {{ company.founded_year }}
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        Num. Followers <span>{{ company.num_followers }}</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        Employee Count Range: <span>{{ company.employee_count_range }}</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        Address: <span>{{ company.address }}</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default overall-rating">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">What it's like to work at {{ company.name }}</h3>
+                  </div>
+                  <div class="panel-body">
+                      {{ company.description }}
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!--more here-->
+
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+</div>
+<!-- current stuff DONT TOUCH -->
 <div class="row top">
     <div class="col-sm-4">
         <div class="panel panel-default">
           <div class="panel-body">
             <a href="{{ company.website_url }}"><img src="{{ company.logo_url }}"></a>
-              <br>
-            <!--<div ng-switch="company">
-{#    <div ng-if="company.logo_url">#}
-{#        <img src="{{ company.logo_url }}">#}
-{#    </div>#}
-{#    <div ng-if="company.logo_url == ''">#}
-{#        <p>Image No image available</p>#}
-{#    </div>#}
-{#</div>#}-->
           </div>
           <div class="panel-footer">{{ company.name }}</div>
         </div>
@@ -124,29 +173,6 @@
         </div>
     </div>
 </div>
-<!--{#<div class="row company">#}
-{#    <div class="col-md-6">#}
-{#        <div class="panel panel-default">#}
-{#          <div class="panel-heading">#}
-{#            <h3 class="panel-title">Comparison of Average Number of followers</h3>#}
-{#          </div>#}
-{#          <div class="panel-body">#}
-{#<!--{#              <bar-chart data="[company.num_followers,avg_num_followers]"></bar-chart>#}
-{#              <bar-chart data="[{'name': company.name, 'value':company.num_followers},{'name': 'Average', 'value': avg_num_followers}]"></bar-chart>#}
-{#          </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="col-md-6">#}
-{#        <div class="panel panel-default">#}
-{#          <div class="panel-heading">#}
-{#            <h3 class="panel-title">Comparison Rating 2</h3>#}
-{#          </div>#}
-{#          <div class="panel-body">#}
-{#              <double-radius></double-radius>#}
-{#          </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}-->
 <div class="row company">
     <div class="row">
         <div ng-show="company.tckr">
