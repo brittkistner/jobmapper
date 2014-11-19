@@ -29,7 +29,6 @@
                 <label for="keywordInput">Keyword(s)</label>
                 <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas" class="form-control" id="keywordInput" required>
             </div>
-            <div>mapForm is {{ mapForm.$valid }}</div>
             <button ng-click="searchCompany(placeName, keywords, industry);" type="submit" class="btn btn-default" >Search</button>
         </form>
     </div>
