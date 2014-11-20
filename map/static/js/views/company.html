@@ -81,7 +81,7 @@
                             <small-donut-chart data="[company.work_life_balance_rating, '\uf0b1']"></small-donut-chart>
                             <div class="row">
                                 <div class="col-sm-8 type_rating">
-                                    <h4>Work/Life Balance: <span>{{ company.work_life_balance_rating }}</span></h4>
+                                    <h4>Work/Life Balance</h4>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <small-donut-chart data="[company.culture_values_rating, '\uf0fc']"></small-donut-chart>
                             <div class="row">
                                 <div class="col-sm-8 type_rating">
-                                    <h4>Culture and Values: <span>{{ company.culture_values_rating }}</span></h4>
+                                    <h4>Culture and Values</h4>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                             <small-donut-chart data="[company.senior_leadership_rating, '\uf006']"></small-donut-chart>
                             <div class="row">
                                 <div class="col-sm-8 type_rating">
-                                    <h4>Senior Leadership: <span>{{ company.senior_leadership_rating }}</span></h4>
+                                    <h4>Senior Leadership</h4>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                             <small-donut-chart data="[company.compensation_benefits_rating, '\uf0d6']"></small-donut-chart>
                             <div class="row">
                                 <div class="col-sm-8 type_rating">
-                                    <h4>Compensation and Benefits: <span>{{ company.compensation_benefits_rating }}</span></h4>
+                                    <h4>Compensation and Benefits</h4>
                                 </div>
                             </div>
                         </div>
@@ -119,10 +119,10 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-3 company">
+            <div class="col-sm-5 company">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    CEO Approval Ratings: {{ company.ceo }}
+                      <h3 class="panel-title">CEO Approval Ratings: {{ company.ceo }}</h3>
                   </div>
                   <div class="panel-body">
                       <img src="{{ company.ceo_image }}" width="80px" height="100px" class="img-circle">
@@ -130,11 +130,28 @@
                       <h1>{{ company.ceo_pct_approve }}% approve</h1>
                       <hr>
                       <h1>{{ company.ceo_pct_disapprove }}% disapprove</h1>
+                      <hr>
+                      <approval-rating data="
+                        [{
+                            data: [{
+                                approval: 'approve',
+                                percent: company.ceo_pct_approve
+                            }],
+                            name: 'Approve'
+                        }, {
+                            data: [ {
+                                approval: 'disapprove',
+                                percent: company.ceo_pct_disapprove
+                            }],
+                            name: 'Disapprove'
+                        }
 
+                        ]
+                      "></approval-rating>
                   </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Comparison of Average Number of followers</h3>
@@ -153,23 +170,7 @@
                 </div>
             </div>
         </div>
-        <approval-rating data="
-                        [{
-                            data: [{
-                                approval: 'approve',
-                                percent: company.ceo_pct_approve
-                            }],
-                            name: 'Approve'
-                        }, {
-                            data: [ {
-                                approval: 'disapprove',
-                                percent: company.ceo_pct_disapprove
-                            }],
-                            name: 'Disapprove'
-                        }
 
-                        ]
-                      "></approval-rating>
     </div>
 </div>
 

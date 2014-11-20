@@ -215,7 +215,7 @@ jobmapper.directive('approvalRating',function(){
             legendPanel = {
                 width: 180
             },
-            width = 500 - margins.left - margins.right - legendPanel.width,
+            width = 475 - margins.left - margins.right - legendPanel.width,
                 height = 100 - margins.top - margins.bottom,
 //                    dataset = scope.data;
                 dataset = [{
@@ -258,7 +258,7 @@ jobmapper.directive('approvalRating',function(){
                     };
                 });
             }),
-                svg = d3.select('body')
+                svg = d3.select(element[0])
                     .append('svg')
                     .attr('width', width + margins.left + margins.right + legendPanel.width)
                     .attr('height', height + margins.top + margins.bottom)
@@ -285,13 +285,13 @@ jobmapper.directive('approvalRating',function(){
                 yAxis = d3.svg.axis()
                     .scale(yScale)
                     .orient('left'),
-                colours = d3.scale.category20b(),
+                colors = d3.scale.category10(),
                 groups = svg.selectAll('g')
                     .data(dataset)
                     .enter()
                     .append('g')
                     .style('fill', function (d, i) {
-                    return colours(i);
+                    return colors(i);
                 }),
                 rects = groups.selectAll('rect')
                 .data(function (d) {
@@ -314,14 +314,14 @@ jobmapper.directive('approvalRating',function(){
                 series.forEach(function (s, i) {
                     svg.append('text')
                         .attr('fill', 'black')
-                        .attr('x', width + margins.left + 8)
+                        .attr('x', width + margins.left)
                         .attr('y', i * 24 + 24)
                         .text(s);
                     svg.append('rect')
-                        .attr('fill', colours(i))
-                        .attr('width', 60)
+                        .attr('fill', colors(i))
+                        .attr('width', 40)
                         .attr('height', 20)
-                        .attr('x', width + margins.left + 90)
+                        .attr('x', width + margins.left+ 90)
                         .attr('y', i * 24 + 6);
                 })
             } //else statement end
