@@ -68,3 +68,11 @@
     padding: 0;
 }
 
+.company .ceo{
+    padding-top: 8%;
+    padding-left: 10%;
+}
+
+.average_num_followers .panel-body{
+    padding-top: 10%;
+}

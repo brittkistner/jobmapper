@@ -125,11 +125,24 @@
                       <h3 class="panel-title">CEO Approval Ratings: {{ company.ceo }}</h3>
                   </div>
                   <div class="panel-body">
-                      <img src="{{ company.ceo_image }}" width="80px" height="100px" class="img-circle">
-                      <hr>
-                      <h1>{{ company.ceo_pct_approve }}% approve</h1>
-                      <hr>
-                      <h1>{{ company.ceo_pct_disapprove }}% disapprove</h1>
+                      <div class="row">
+                          <div class="col-sm-8">
+                              <div class="row">
+                                  <div class="col-sm-12">
+                                      <h1>{{ company.ceo_pct_approve }}% approve</h1>
+                                  </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-sm-12">
+                                      <h1>{{ company.ceo_pct_disapprove }}% disapprove</h1>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-sm-3 ceo">
+                              <img src="{{ company.ceo_image }}" width="80px" height="100px" class="img-circle">
+                          </div>
+                      </div>
                       <hr>
                       <approval-rating data="
                         [{
@@ -151,13 +164,12 @@
                   </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 average_num_followers">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Comparison of Average Number of followers</h3>
                   </div>
                   <div class="panel-body">
-        <!--{#              <bar-chart data="[company.num_followers,avg_num_followers]"></bar-chart>#}-->
                       <bar-chart data="[{'name': company.name, 'value':company.num_followers},{'name': 'Average', 'value': avg_num_followers}]"></bar-chart>
                   </div>
                 </div>
