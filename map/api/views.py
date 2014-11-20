@@ -20,8 +20,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
         if keywords:
             keywords = keywords.split(',')
 
-            print keywords
-
         #Get industry value
         industry = self.request.QUERY_PARAMS.get('industry', None)
         if industry:
@@ -48,7 +46,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
             else:
                 filter_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02)
 
-            print filter_query
             location = {
                 "latitude": my_lat,
                 "longitude": my_lng
@@ -62,7 +59,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
     #Route to retrieve all non-duplicate industries within the Company table
     @list_route()
     def get_industries(self, request):
-        print "hello"
         companies = Company.objects.all()
         industries = []
         for company in companies:
@@ -75,7 +71,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
     #Route to retrieve average number of followers across all companies
     @list_route()
     def get_average_num_followers(self, request):
-        print "hello"
         average_num_followers_for_all_companies = int(Company.objects.all().aggregate(Avg('num_followers'))['num_followers__avg'])
         print average_num_followers_for_all_companies
         data = json.dumps(average_num_followers_for_all_companies)
