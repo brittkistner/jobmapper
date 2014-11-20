@@ -8,7 +8,7 @@
                 <h1 id="name">{{ company.name }}</h1>
             </div>
         </div>
-        <div class="row 1">
+        <div class="row">
             <div class="col-sm-4 details">
                 <div class="row">
                     <div class="panel panel-default">
@@ -55,7 +55,14 @@
                 </div>
             </div>
         </div>
-        <div class="row 2 company">
+        <div class="row">
+            <div class="col-sm-6 header_reviews">
+                <h2>{{ company.name }} Reviews</h2>
+                <span>*The Ratings in this section are out of 5</span>
+                <hr>
+            </div>
+        </div>
+        <div class="row company">
             <div class="col-sm-4">
                 <div class="panel panel-default overall-rating">
                   <div class="panel-heading">
@@ -67,16 +74,24 @@
                   </div>
                 </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6 col-sm-offset-1 detail_ratings">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-sm-6">
                             <small-donut-chart data="[company.work_life_balance_rating, '\uf0b1']"></small-donut-chart>
-                            <h4>Work/Life Balance</h4>
+                            <div class="row">
+                                <div class="col-sm-8 type_rating">
+                                    <h4>Work/Life Balance: <span>{{ company.work_life_balance_rating }}</span></h4>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <small-donut-chart data="[company.culture_values_rating, '\uf0fc']"></small-donut-chart>
-                            <h4>Culture and Values</h4>
+                            <div class="row">
+                                <div class="col-sm-8 type_rating">
+                                    <h4>Culture and Values: <span>{{ company.culture_values_rating }}</span></h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,17 +99,26 @@
                     <div class="col-sm-12">
                         <div class="col-sm-6">
                             <small-donut-chart data="[company.senior_leadership_rating, '\uf006']"></small-donut-chart>
-                            <h4>Senior Leadership</h4>
+                            <div class="row">
+                                <div class="col-sm-8 type_rating">
+                                    <h4>Senior Leadership: <span>{{ company.senior_leadership_rating }}</span></h4>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <small-donut-chart data="[company.compensation_benefits_rating, '\uf0d6']"></small-donut-chart>
-                            <h4>Compensation and Benefits</h4>
+                            <div class="row">
+                                <div class="col-sm-8 type_rating">
+                                    <h4>Compensation and Benefits: <span>{{ company.compensation_benefits_rating }}</span></h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row 3">
+
+        <div class="row">
             <div class="col-sm-3 company">
                 <div class="panel panel-default">
                   <div class="panel-heading">
@@ -121,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <div class="row 4">
+        <div class="row">
             <div ng-show="company.tckr">
                 <div class="col-xs-6 ">
                     <highchart id="chart1" config="chartConfig" disableDataWatch="false" class="span9" ></highchart>

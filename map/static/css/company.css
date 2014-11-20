@@ -1,22 +1,12 @@
-.row .company{
-    /*min-height: 300px;*/
-    /*border: 1px solid black;*/
-}
-
-.top{
-    /*min-height: 300px;*/
-    /*border: 1px solid black;*/
-}
-
 .overall-rating{
     min-width: 300px;
     text-align: center;
     min-height: 300px;
 }
 
-/*.company h1{*/
-    /*font-size: 3.5em;*/
-/*}*/
+.overall-rating .panel-body{
+    padding-top: 5%;
+}
 
 #name{
     font-size: 80px;
@@ -27,7 +17,7 @@
 }
 
 .details span{
-    color: #D0743C;
+    color: #A05D56;
     padding-right: 5%;
 }
 
@@ -48,4 +38,32 @@
 
 .company_page .row{
     margin-bottom: 5%;
+}
+
+.header_reviews h2{
+    color: #A05D56;
+}
+
+.header_reviews span{
+    color: black;
+    font-size: 12px;
+    padding-bottom:10%;
+    margin-left: 3%;
+}
+
+.detail_ratings {
+    padding-top: 1%;
+}
+
+.detail_ratings h4{
+    margin: 0;
+}
+
+.detail_ratings span{
+    color: #A05D56;
+    font-weight: bold;
+}
+
+.detail_ratings .type_rating{
+    padding: 0;
 }

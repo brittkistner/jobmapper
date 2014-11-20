@@ -23,8 +23,8 @@ jobmapper.directive('donutChart', function() {
 
                 var icon = svg.append("text")
                   .attr('font-family', 'FontAwesome')
-                  .attr('font-size', '18em')
-                  .attr("transform", "translate(-108,90)")
+                  .attr('font-size', '12em')
+                  .attr("transform", "translate(-72,55)")
                   .text("\uf118");
 
               var rating = svg.append("text")
