@@ -19,11 +19,14 @@ body{
 }
 
 .navbar-inverse{
-    height: 70px;
+    height: 85px;
     background-color: #1a2224;
 }
 
 
 .headline{
     color: white;
+    max-width: 420px;
+    font-size: 13.5px;
+    margin-top: 1%;
 }

@@ -65,20 +65,16 @@
       </div>
       <div class="navbar-collapse collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="headline">Looking for a new gig?  Jobmapper makes it easy to assess a company before you apply.  Search and find your fit. </li>
-          <li><a href="/"><img src="{% static "images/map_icon.png" %}" width="40px" height="40px"></a></li>
+            <p class="navbar-text headline">Looking for a new gig? <br>  Jobmapper makes it easy to assess a company before you apply. <br> Search and find your fit. </p>
+            <li><a href="/"><img src="{% static "images/map_icon.png" %}" width="40px" height="40px"></a></li>
+        </ul>
         </ul>
       </div>
     </div>
-{#    <div class="container-fluid">#}
-{#        <div class="row">#}
-{#            <div class="col-md-12">#}
-                <div ng-app="jobmapper" class="jobmapper">
-                    <div ng-view class="container-fluid"></div>
-                </div>
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    <div ng-app="jobmapper" class="jobmapper">
+        <div ng-view class="container-fluid"></div>
+    </div>
+
 
 
 </body>
