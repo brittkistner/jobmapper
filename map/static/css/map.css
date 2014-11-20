@@ -13,11 +13,11 @@
 
 
 .ng-invalid.ng-dirty{
-    border-color: #E80C47;
+    border-color: #FD8C25;
 }
 
 .ng-valid.ng-dirty{
-    border-color: #FD8C25;
+    border-color: #c1d0cf;
 }
 
 .leaflet-popup-content h1{
@@ -27,17 +27,19 @@
 
 .leaflet-popup-content a{
     color: #6B486B;
+
 }
+
 
 form{
     padding: 10%;
-    font-size: 24px;
 
 
 }
 
 form label{
-    font-weight: 800;
+    font-size: 24px;
+
 }
 
 div.panel-body{
