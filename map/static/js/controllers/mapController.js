@@ -1,5 +1,7 @@
 function mapController($scope, $http) {
     console.log('mapController');
+
+    //Populates search form, industry input based on api query
     $http.get('/api/companies/get_industries')
         .success(function (industries) {
             $scope.industries = JSON.parse(industries);
@@ -9,10 +11,9 @@ function mapController($scope, $http) {
             console.log(error);
         });
 
+    //Once the search form is submitted the data is queried DRF
+    //Returns company queryset information given location (required) and keywords/industry
     $scope.searchCompany = function(placeName, keywords, industry) {
-//        console.log(placeName);
-//        console.log(keywords);
-//        console.log(industry.name);
         console.log(encodeURIComponent(placeName));
         $http.get('/api/companies/get_companies_by_location/?location=' + encodeURIComponent(placeName) + (keywords ? '&keywords=' + encodeURIComponent(keywords) : '') + (industry ? '&industry=' + encodeURIComponent(industry.name) : ''))
             .success(function(combinedObject) {

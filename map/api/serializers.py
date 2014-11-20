@@ -9,7 +9,6 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ('assigned_key',
-            # 'id',
                   'popularity',
                   'LICID',
                   'GDCID',
@@ -47,7 +46,7 @@ class CompanySerializer(serializers.ModelSerializer):
                   )
 
     def get_popularity(self, obj):
-        average_overall_rating_for_all_companies = Company.objects.all().aggregate(Avg('overall_rating'))['overall_rating__avg'] #Keep this for overall rating across all industries
+        average_overall_rating_for_all_companies = Company.objects.all().aggregate(Avg('overall_rating'))['overall_rating__avg']
         single_company_overall_rating = obj.overall_rating
         company_popularity_comparison = obj.overall_rating/average_overall_rating_for_all_companies
         return company_popularity_comparison

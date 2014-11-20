@@ -1,9 +1,7 @@
 import json
 import urllib
-# import django_filters
-from django.core import serializers
 from django.db.models import Avg
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
 from map.api.serializers import CompanySerializer, KeywordSerializer
@@ -74,6 +72,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
         data = json.dumps(industries)
         return Response(data)
 
+    #Route to retrieve average number of followers across all companies
     @list_route()
     def get_average_num_followers(self, request):
         print "hello"

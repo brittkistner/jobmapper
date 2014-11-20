@@ -8,8 +8,10 @@ jobmapper.directive('donutChart', function() {
                 var width = 300;
                     height = 300;
                     τ = 2* Math.PI; // http://tauday.com/tau-manifesto
+              //calculates the arc value based on the given rating data
                 var arcValue = ((data/5) * (0.7 * τ)) - 0.35 * τ;
 
+              //sets the arc angle, innerRadius, outerRadius
                 var arc = d3.svg.arc()
                     .innerRadius(110)
                     .outerRadius(150)
@@ -21,6 +23,7 @@ jobmapper.directive('donutChart', function() {
                   .append("g")
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+              //appends font-awesome icon to image
                 var icon = svg.append("text")
                   .attr('font-family', 'FontAwesome')
                   .attr('font-size', '12em')
@@ -40,7 +43,6 @@ jobmapper.directive('donutChart', function() {
 
                 var foreground = svg.append("path")
                     .datum({endAngle: -.35 * τ})
-        //            .datum({endAngle: 0})
                     .style("fill", "#D0743C")
                     .attr("d", arc);
 
@@ -144,6 +146,7 @@ jobmapper.directive('smallDonutChart', function() {
     }
 });
 
+//Number of followers chart
 jobmapper.directive('barChart', function() {
     function link(scope, element, attr){
         scope.$watch('data', function(data){

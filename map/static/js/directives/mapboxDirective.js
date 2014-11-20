@@ -1,3 +1,5 @@
+//See project here: http://inkblot.io/angular-mapbox/
+
 L.mapbox.accessToken = 'pk.eyJ1IjoiYmtpc3RuZXIiLCJhIjoiN2I1M0stSSJ9.KuFhmem-2ZN4Q6LddSUgiQ';
 
 angular.module('jobmapper').directive('featureLayer', function() {
@@ -22,13 +24,6 @@ angular.module('jobmapper').directive('featureLayer', function() {
     }
   };
 });
-
-//var map = L.mapbox.map('map');
-//
-//var stamenLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
-//  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
-//}).addTo(map);
-
 
 angular.module('jobmapper').directive('mapbox', function($compile, $q) {
   var _mapboxMap;

@@ -1,8 +1,10 @@
 function companyController($scope, $http, $routeParams) {
     console.log('companyController');
     $scope.companyId = $routeParams.companyId;
-//    console.log($scope.companyId);
 
+    //Retrieves specific company from api
+    //coverts the overall rating for  a company
+    //calls Quandl for stock data
     $http.get('/api/companies/' + $scope.companyId)
         .success(function (company) {
             console.log(company);
@@ -20,6 +22,7 @@ function companyController($scope, $http, $routeParams) {
             console.log(error);
         });
 
+    //Retrieves average number of followers on Linkedin from DRF api
     $http.get('/api/companies/get_average_num_followers')
         .success(function (avg_num_followers) {
             $scope.avg_num_followers = JSON.parse(avg_num_followers);
@@ -28,6 +31,7 @@ function companyController($scope, $http, $routeParams) {
             console.log(error);
         });
 
+    //Sorts stock data by time in milliseconds
     var sorter = function(a,b){
        if (a[0] < b[0]) {
            return -1;
@@ -58,6 +62,7 @@ function companyController($scope, $http, $routeParams) {
     //                "Adj. Volume"
     //                ],
                 var dataset = [];
+                //converts Quandl time 2014-12-10 to millliseconds
                 for (var i=0; i < stockData.data.length; i++ ){
                     //convert data to milliseconds
                     var dashdates = stockData.data[i][0]; //2013-07-01
@@ -79,6 +84,7 @@ function companyController($scope, $http, $routeParams) {
 
     //HIGHSTOCK BELOW
     var chart_maker = function(data){
+        //styling for highcharts
         $scope.chartTypes = [
             {"id": "line", "title": "Line"},
             {"id": "spline", "title": "Smooth line"},
@@ -118,7 +124,7 @@ function companyController($scope, $http, $routeParams) {
         {"id": "percent", "title": "Percent"}
         ];
 
-
+        //congigures chart, see http://www.highcharts.com/ for docs
         $scope.chartConfig = {
             options: {
               chart: {
@@ -169,6 +175,8 @@ function companyController($scope, $http, $routeParams) {
         $scope.reflow = function () {
             $scope.$broadcast('highchartsng.reflow');
         };
+        //important!  Allows for two-way data binding to highStockDirective.js.
+        // Watchers on highStockDirective.js will not pick up new data without this.
         $scope.$apply();
     };
 
