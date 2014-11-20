@@ -11,7 +11,6 @@ function companyController($scope, $http, $routeParams) {
             if($scope.company.tckr){
                 //Call Quandl api for stock data
                 getStockData($scope.company.tckr);
-                console.log('tckr ' + $scope.company.tckr);
             }else{
                 console.log('no tckr');
             }
@@ -69,7 +68,6 @@ function companyController($scope, $http, $routeParams) {
                     event.preventDefault();
                 }
                 dataset.sort(sorter);
-                console.log(dataset);
               //create chart
                 chart_maker(dataset);
             })
@@ -139,12 +137,34 @@ function companyController($scope, $http, $routeParams) {
             credits: {
               enabled: false
             },
+            xAxis: {
+                type: 'datetime',
+                events: {
+                    afterSetExtremes: function(event) {
+                       var date = new Date(event.min);
+                        var datevalues = date.getFullYear()
+                        +'-'+ date.getMonth()+1
+                        +'-'+ date.getDate()
+                        +' '+ date.getUTCHours()
+                        +':'+ date.getMinutes()
+                        +':'+ date.getSeconds();
+                        $("#timestamp").text(datevalues);
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
             loading: false,
             size: {}
         };
-        console.log($scope.chartConfig);
-
-
 
         $scope.reflow = function () {
             $scope.$broadcast('highchartsng.reflow');

@@ -183,8 +183,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           var prevSeriesOptions = {};
 
           var processSeries = function (series) {
-              console.log('fifth comment in directive');
-
               var i;
               var ids = [];
 

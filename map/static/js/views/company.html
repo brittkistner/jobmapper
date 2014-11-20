@@ -122,14 +122,15 @@
             <div class="col-sm-3 company">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    Approval Ratings
+                    CEO Approval Ratings: {{ company.ceo }}
                   </div>
                   <div class="panel-body">
-                      <img src="{{ company.ceo_image }}" width="80px" height="100px">
+                      <img src="{{ company.ceo_image }}" width="80px" height="100px" class="img-circle">
                       <hr>
                       <h1>{{ company.ceo_pct_approve }}% approve</h1>
                       <hr>
                       <h1>{{ company.ceo_pct_disapprove }}% disapprove</h1>
+
                   </div>
                 </div>
             </div>
@@ -152,6 +153,23 @@
                 </div>
             </div>
         </div>
+        <approval-rating data="
+                        [{
+                            data: [{
+                                approval: 'approve',
+                                percent: company.ceo_pct_approve
+                            }],
+                            name: 'Approve'
+                        }, {
+                            data: [ {
+                                approval: 'disapprove',
+                                percent: company.ceo_pct_disapprove
+                            }],
+                            name: 'Disapprove'
+                        }
+
+                        ]
+                      "></approval-rating>
     </div>
 </div>
 
