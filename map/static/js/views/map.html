@@ -2,7 +2,7 @@
     <div class="col-sm-9 map">
         <div id="map">
 <!--{#            <mapbox map-id="bkistner.k0m7ndk8" lat="{{ location.latitude }}" lng="{{ location.longitude}}" zoom="13">#}-->
-            <mapbox map-id="bkistner.a15e6a6c" lat="37.7833" lng="-122.4167" zoom="13">
+            <mapbox map-id="bkistner.k0m7ndk8" lat="37.780652" lng="-122.431392" zoom="14">
                 <div ng-repeat="company in companies">
                     <marker lat="{{company.latitude}}" lng="{{company.longitude}}" color="#7B6888" symbol="ferry">
                        <h1>{{company.name}}</h1>
@@ -15,21 +15,27 @@
             </mapbox>
         </div>
     </div>
-    <div class="col-sm-3">
-        <form name="mapForm" role="form" class="form-horizontal" novalidate >
-            <div class="form-group">
-                <label for="locationInput">Search By Place</label>
-                <input ng-model="placeName" type="text" placeholder="San Francisco, CA" class="form-control" id="locationInput" required>
+    <div class="col-sm-3 search_box">
+        <div class="panel panel-default search">
+          <div class="panel-body">
+            <div class="row">
+                <form name="mapForm" role="form" class="form-horizontal" novalidate >
+                    <div class="form-group">
+                        <label for="locationInput">Search By Place</label>
+                        <input ng-model="placeName" type="text" placeholder="San Francisco, CA" class="form-control" id="locationInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="locationInput">Industry</label>
+                        <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="keywordInput">Keyword(s)</label>
+                        <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas" class="form-control" id="keywordInput" required>
+                    </div>
+                    <button ng-click="searchCompany(placeName, keywords, industry);" type="submit" class="btn btn-default" >Search</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="locationInput">Industry</label>
-                <select ng-model="industry"  ng-options="industry.name for industry in industries"></select>
-            </div>
-            <div class="form-group">
-                <label for="keywordInput">Keyword(s)</label>
-                <input ng-model="keywords" type="text" placeholder="search by keyword, separate by commas" class="form-control" id="keywordInput" required>
-            </div>
-            <button ng-click="searchCompany(placeName, keywords, industry);" type="submit" class="btn btn-default" >Search</button>
-        </form>
+          </div>
+        </div>
     </div>
 </div>

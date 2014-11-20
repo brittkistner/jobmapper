@@ -4158,10 +4158,16 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
   }
 }
+/*.navbar-default {*/
+  /*background-color: #dd4814;*/
+  /*border-color: #bf3e11;*/
+/*}*/
+
 .navbar-default {
   background-color: #dd4814;
   border-color: #bf3e11;
 }
+
 .navbar-default .navbar-brand {
   color: #ffffff;
 }

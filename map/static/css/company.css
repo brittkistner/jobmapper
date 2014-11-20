@@ -14,6 +14,11 @@
     min-height: 300px;
 }
 
-.company h1{
-    font-size: 3.5em;
+/*.company h1{*/
+    /*font-size: 3.5em;*/
+/*}*/
+
+#name h1{
+    font-size: 2.5em;
+    /*font-size: 200px !important;*/
 }

@@ -31,10 +31,22 @@
 
 form{
     padding: 10%;
+    font-size: 24px;
+
 
 }
 
 form label{
     font-weight: 800;
+}
+
+div.panel-body{
+    margin:0;
+    padding-top:0;
+    padding-bottom:0;
+}
+.search{
+    margin-top: 10%;
+    padding-bottom: 0;
 }
 
