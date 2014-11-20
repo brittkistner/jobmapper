@@ -18,7 +18,34 @@
     /*font-size: 3.5em;*/
 /*}*/
 
-#name h1{
-    font-size: 2.5em;
-    /*font-size: 200px !important;*/
+#name{
+    font-size: 80px;
+}
+
+.details{
+    font-size: 20px;
+}
+
+.details span{
+    color: #D0743C;
+    padding-right: 5%;
+}
+
+
+.address{
+    padding-left:20%;
+}
+
+.company_page .panel-title{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Text Me One', sans-serif;
+}
+
+.description{
+    font-size: 20px;
+}
+
+.company_page .row{
+    margin-bottom: 5%;
 }
