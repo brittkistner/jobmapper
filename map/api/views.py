@@ -54,6 +54,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
             location_serializer = json.dumps(location)
             combined_object = {'location': location_serializer, 'companies': companies_serializer.data}
             data = json.dumps(combined_object)
+            print data
             return Response(data)
 
     #Route to retrieve all non-duplicate industries within the Company table
