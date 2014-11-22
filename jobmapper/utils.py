@@ -1,6 +1,7 @@
 from linkedin import linkedin
 
-
+# Is this utils file being used? Usually setting global python variables like this is not best practice.
+# Some libraries are poorly written though and require you to do this
 from linkedin import linkedin
 RETURN_URL = 'http://localhost:8000'
 CONSUMER_KEY = '75b51aiefo2ejs'
@@ -14,7 +15,7 @@ authentication = linkedin.LinkedInDeveloperAuthentication(CONSUMER_KEY, CONSUMER
 
 application = linkedin.LinkedInApplication(authentication)
 
-
+# long line that should be split up
 li_companies_results = application.search_company(selectors=[{'companies':['name', 'id', 'website-url', 'type']}],params={ 'facets':'location','facet':'location,us:84','keywords':'technology','count':10})
 #do a json.dumps to get it into python
 
