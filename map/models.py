@@ -3,7 +3,8 @@ import urllib
 from django.db import models
 
 
-
+# big model! For speed and performance this is probably fine, by some parts of this could
+# probably be put in separate models (CEO, location information, industry, etc)
 class Company(models.Model):
     assigned_key = models.IntegerField(primary_key=True)
     LICID = models.CharField(max_length=10, null=True)
@@ -38,6 +39,8 @@ class Company(models.Model):
     ceo = models.CharField(max_length=255, null=True)
     ceo_image = models.URLField(null=True)
     ceo_num_rating = models.IntegerField(null=True)
+    # For the approval ratings in this model, is the disapprove rating just 100% - approval rating?
+    # Could just store one value, then you can do simple math to get the other value
     ceo_pct_approve = models.IntegerField(null=True)
     ceo_pct_disapprove = models.IntegerField(null=True)
 
