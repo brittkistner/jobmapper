@@ -11,6 +11,8 @@ class Command(BaseCommand):
         company_file_path = os.path.join(module_dir, 'csv_company.csv')
         with open(company_file_path, 'rb') as company_file:
             for row in csv.reader(company_file):
+                # Probably would of been easier in development and production to make this more of a `get_or_create`
+                # based on assigned_key, which looks like your unique way of identifying the companies.
                 company = Company.objects.create(  assigned_key = int(row[0]),
                                                    LICID=int(row[1]),
                                                    GDCID=int(row[2]),
@@ -53,6 +55,7 @@ class Command(BaseCommand):
         keyword_file_path = os.path.join(module_dir, 'csv_keyword.csv')
         with open(keyword_file_path, 'rb') as keyword_file:
             for row in csv.reader(keyword_file):
+                # since assigned_key is your priamry key field, you should be able to just say pk=row[0]
                 company = Company.objects.get(assigned_key=row[0])
                 keyword = Keyword.objects.create(company=company,
                                        word=row[1])
