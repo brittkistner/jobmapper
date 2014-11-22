@@ -2,6 +2,8 @@ function companyController($scope, $http, $routeParams) {
     console.log('companyController');
     $scope.companyId = $routeParams.companyId;
 
+    // API calls in this controller and the other would be better off shared in factory/service
+
     //Retrieves specific company from api
     //coverts the overall rating for  a company
     //calls Quandl for stock data
@@ -81,6 +83,7 @@ function companyController($scope, $http, $routeParams) {
             });
     };
 
+    // This looks better off in a directive, possibly in a directive specific controller
 
     //HIGHSTOCK BELOW
     var chart_maker = function(data){
