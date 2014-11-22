@@ -1,5 +1,6 @@
 from django.db.models import Avg
 from rest_framework import serializers
+# You may not wanted to have caleld your django app `map` since map is a built-in python function
 from map.models import Company, Keyword
 
 
@@ -46,8 +47,12 @@ class CompanySerializer(serializers.ModelSerializer):
                   )
 
     def get_popularity(self, obj):
+        # nice aggregate!
         average_overall_rating_for_all_companies = Company.objects.all().aggregate(Avg('overall_rating'))['overall_rating__avg']
+        
+        # This seems unused
         single_company_overall_rating = obj.overall_rating
+        
         company_popularity_comparison = obj.overall_rating/average_overall_rating_for_all_companies
         return company_popularity_comparison
 
