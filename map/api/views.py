@@ -37,6 +37,18 @@ class CompanyViewSet(viewsets.ModelViewSet):
             queryset = Company.objects.all()
 
             #Filter companies my the minimum and maximum latitude and longitude to form a square range
+            
+            # Not very DRY, instead you should build up a dictionary of filters, then pass it to filter
+            # see a pseudo example below
+            filters = {
+                'latitude__gt': my_lat-.02
+            }
+            
+            if keywords:
+                filters['keywords__word__in'] = keywords
+                
+            filter_query = queryset.filter(**keywords)
+            
             if keywords and industry:
                 filter_query = queryset.filter(latitude__gt=my_lat-.02, latitude__lt=my_lat+.02, longitude__gt=my_lng-.02, longitude__lt=my_lng+.02, industry__iexact=industry, keywords__word__in=keywords)
             elif keywords:
@@ -60,6 +72,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     #Route to retrieve all non-duplicate industries within the Company table
     @list_route()
     def get_industries(self, request):
+        # I think this would be easier if Industry was a separate model?
         companies = Company.objects.all()
         industries = []
         for company in companies:
